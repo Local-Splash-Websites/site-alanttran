@@ -1,0 +1,55 @@
+# Works with the vhost from scripts/setup-server.sh (AllowOverride All).
+Options -Indexes -MultiViews
+DirectoryIndex index.html index.php
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# HTTP -> HTTPS redirect is added to the Apache vhost by certbot (ENABLE_HTTPS=true),
+# so the site still works over plain http before a certificate exists.
+
+# Add trailing slash to directory-style URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
+
+# Old WordPress URLs (alantran-plastic-surgery.com) -> new pages
+RewriteRule ^about-us/?$ /about/ [L,R=301]
+RewriteRule ^(contact-us|book-an-appointment)/?$ /contact/ [L,R=301]
+RewriteRule ^testimonials/?$ /#testimonials [L,R=301,NE]
+RewriteRule ^services/skin-cancer-treatment/?$ /services/skin-cancer-treatments/ [L,R=301]
+RewriteRule ^(services/)?nipple-reduction/?$ /services/ [L,R=301]
+RewriteRule ^(feed|comments/feed|wp-json|wp-admin|wp-login\.php|xmlrpc\.php)(/.*)?$ - [G]
+
+# Old Duda paths (in case anyone linked the preview) e.g. /fat-transfer_grafting
+RewriteRule ^(about|contact|gallery|specials|services|tour-the-office|meet-the-doctor|privacy-policy)$ /$1/ [L,R=301]
+RewriteRule ^fat-transfer_grafting/?$ /services/fat-transfer-grafting/ [L,R=301]
+RewriteRule ^tummy-tuck--abdominoplasty/?$ /services/tummy-tuck-abdominoplasty/ [L,R=301]
+RewriteRule ^brazilian-butt-lift--fat-grafting/?$ /services/brazilian-butt-lift-fat-grafting/ [L,R=301]
+RewriteRule ^butt-lift--traditional-excision/?$ /services/butt-lift-traditional-excision/ [L,R=301]
+RewriteRule ^injectables---fillers/?$ /services/injectables-fillers/ [L,R=301]
+RewriteRule ^skin-cancer-treatment/?$ /services/skin-cancer-treatments/ [L,R=301]
+RewriteRule ^(arm-lift|body-contouring|body-implants|breast-augmentation|breast-lift|breast-lumpectomy|breast-reconstruction|breast-reduction|breast-revision|brow-lift|earlobe-repair|eyelid-surgery|face-lift|keloid-scar-treatment|liposuction|neck-lift|rhinoplasty|skin-tightening|thigh-lift)/?$ /services/$1/ [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+Header always set X-Content-Type-Options "nosniff"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+<FilesMatch "\.(css|js|webp|svg|woff2?)$">
+  Header set Cache-Control "public, max-age=2592000"
+</FilesMatch>
+<FilesMatch "\.html$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/xml text/plain
+</IfModule>
+
+<FilesMatch "^\.(env|git)">
+  Require all denied
+</FilesMatch>
