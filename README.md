@@ -6,8 +6,8 @@ ready to run on your own Apache server: fast static HTML plus one small PHP scri
 ## Quick start (fresh Ubuntu 22.04/24.04 or Debian 12/13 server)
 
 ```bash
-git clone https://github.com/drodecker/alan-tran-plastic-surgery-site.git
-cd alan-tran-plastic-surgery-site
+git clone https://github.com/localsplash/site-dralantran.org.git
+cd site-dralantran.org
 cp .env.example .env
 nano .env                         # fill in the values below
 sudo ./scripts/setup-server.sh    # installs + configures everything; safe to re-run
