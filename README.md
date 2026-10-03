@@ -63,7 +63,7 @@ content/pages.json        Every service page, About, Gallery, Privacy Policy (cl
 build/build.py            Generates public/ from the content (Python 3, no dependencies)
 src/static/               CSS, JS, contact.php, .htaccess, favicon (copied into public/)
 assets/manifest.tsv       Image list (local name -> original CDN URL)
-scripts/fetch-assets.py   Re-downloads any missing image from the old CDN as optimized WebP (all 101 are already committed)
+scripts/fetch-assets.py   Re-downloads any missing image from the old CDN as optimized WebP (all are already committed)
 scripts/setup-server.sh   One-shot server provisioning
 scripts/deploy.sh         Rebuild + publish
 scripts/preview.sh        Local preview
@@ -83,6 +83,7 @@ Home, About, Meet the Doctor, Tour the Office, Services (index plus 25 procedure
 ## Changes from the original
 
 - One responsive site instead of separate desktop and mobile versions.
+- Home page hero keeps the legacy rotating background: the same six images, crossfading every 5 seconds (pauses in background tabs, stays still for reduced-motion users).
 - Logo is styled text (Fraunces): his name larger and in a lighter gray (`#5E6068`), with "PLASTIC SURGERY" in the brand pink.
 - Tagline is now **"Serving Orange County Since 2000"** in the darker brand pink `#B3155A`.
 - Every "2006" changed to "2000".

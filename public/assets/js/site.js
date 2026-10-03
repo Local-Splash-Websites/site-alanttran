@@ -1,4 +1,4 @@
-// Mobile nav, submenus, testimonial carousel, gallery lightbox, form timestamp.
+// Mobile nav, rotating hero background, submenus, testimonial carousel, gallery lightbox, form timestamp.
 (function () {
   var toggle = document.querySelector('.nav-toggle'), nav = document.getElementById('main-nav');
   if (toggle && nav) toggle.addEventListener('click', function () {
@@ -52,4 +52,30 @@
     m.textContent = q === 'rate' ? 'Too many messages from your connection. Please call us instead.' : 'Sorry, your message could not be sent. Please check the form or call the office.';
     form.prepend(m);
   }
+})();
+
+// Rotating hero background: crossfades every 5 seconds, loads each image just before it's shown,
+// pauses while the tab is hidden, and stays on the first image for reduced-motion users.
+(function () {
+  var hero = document.querySelector('[data-hero-slides]');
+  if (!hero) return;
+  var slides = hero.querySelectorAll('.hero-slide');
+  if (slides.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var i = 0, timer = null;
+  function load(el) {
+    if (el.dataset.bg) { el.style.backgroundImage = "url('" + el.dataset.bg + "')"; delete el.dataset.bg; }
+  }
+  function next() {
+    var n = (i + 1) % slides.length;
+    load(slides[n]);
+    slides[i].classList.remove('is-active');
+    slides[n].classList.add('is-active');
+    i = n;
+    load(slides[(i + 1) % slides.length]);
+  }
+  function start() { if (!timer) timer = setInterval(next, 5000); }
+  function stop() { clearInterval(timer); timer = null; }
+  load(slides[1]);
+  start();
+  document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
 })();

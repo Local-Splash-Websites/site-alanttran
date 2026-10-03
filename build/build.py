@@ -270,8 +270,17 @@ def build_home():
     points_html = "".join(f'<li><span class="pnum">{i+1:02d}</span><div><h4>{e(h)}</h4><p>{e(t)}</p></div></li>' for i, (h, t) in enumerate(points))
     slides = "".join(f'<figure class="slide"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“{e(t)}”</blockquote><figcaption>Verified patient review</figcaption></figure>' for t in TESTIMONIALS)
     dots = "".join(f'<button class="dot" aria-label="Show review {i+1}"></button>' for i in range(len(TESTIMONIALS)))
+    # Rotating hero background, same six images and order as the legacy Duda slideshow
+    hero_imgs = ["chatgpt-image-sep-30-2026-12-15-44-am", "chatgpt-image-sep-30-2026-12-11-17-am",
+                 "chatgpt-image-sep-30-2026-12-13-24-am", "pexels-photo-6303784",
+                 "chatgpt-image-sep-30-2026-12-18-26-am", "chatgpt-image-sep-30-2026-12-19-41-am"]
+    hero_slides = "".join(
+        f'<div class="hero-slide is-active" style="background-image:url(\'{img_url(n)}\')"></div>' if i == 0
+        else f'<div class="hero-slide" data-bg="{img_url(n)}"></div>'
+        for i, n in enumerate(hero_imgs))
     body = f"""
-<section class="hero" style="background-image:url('{img_url('chatgpt-image-sep-30-2026-12-13-24-am')}')">
+<section class="hero" data-hero-slides>
+  <div class="hero-slides" aria-hidden="true">{hero_slides}</div>
   <div class="wrap hero-inner">
     <p class="hero-tag">{e(s['tagline'])}</p>
     <h1>Your Best Look, <em>Naturally You</em></h1>
