@@ -35,10 +35,13 @@ for slug, p in pages.items():
 CAT_ORDER = ["Breast", "Body", "Skin", "Face"]
 
 # ---------------------------------------------------------------- layout
-def logo(cls=""):
+def logo(cls="", include_mark=False):
+    mark = ('<img class="logo-mark" src="/assets/img/alan-tran-mark.png" '
+            'alt="" width="79" height="90">' if include_mark else "")
     return (f'<a class="logo {cls}" href="/" aria-label="{e(site["practice_name"])} home">'
+            f'{mark}<span class="logo-copy">'
             f'<span class="logo-name">{e(site["logo_name"])}</span>'
-            f'<span class="logo-sub">{e(site["logo_sub"])}</span></a>')
+            f'<span class="logo-sub">{e(site["logo_sub"])}</span></span></a>')
 
 def nav(active):
     mega = "".join(
@@ -68,24 +71,24 @@ def nav(active):
 def header(active):
     return f"""
 <a class="skip" href="#main">Skip to content</a>
-<div class="topbar"><div class="wrap topbar-inner">
-  <span class="tb-item tb-addr"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>{e(site['address_line'])}, {e(site['city'])}, {e(site['state'])}</span>
-  <span class="tb-item tb-hours">{e(site['hours_short'])}</span>
-  <a class="tb-item" href="mailto:{e(site['email'])}">{e(site['email'])}</a>
-  <a class="tb-item" href="tel:{site['phone_e164']}">{e(site['phone'])}</a>
-</div></div>
 <header class="site-header"><div class="wrap header-inner">
-  {logo()}
+  {logo(include_mark=True)}
   <button class="nav-toggle" aria-controls="main-nav" aria-expanded="false"><span></span><span></span><span></span><span class="sr">Menu</span></button>
   {nav(active)}
-  <div class="header-cta">
-    <a class="header-phone" href="tel:{site['phone_e164']}">{e(site['phone'])}</a>
-    <a class="btn btn-pink" href="/contact/">Request a Consultation</a>
+  <div class="header-contact" aria-label="Practice contact information">
+    <a class="header-contact-link header-address" href="https://www.google.com/maps/search/?api=1&amp;query=17931%20Euclid%20St%2C%20Fountain%20Valley%2C%20CA%2092708" target="_blank" rel="noopener" aria-label="Directions to {e(site['address_line'])}, {e(site['city'])}, {e(site['state'])} {e(site['zip'])}">
+      <span class="header-contact-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
+      <span class="header-contact-text">{e(site['address_line'])}<small>{e(site['city'])}, {e(site['state'])} {e(site['zip'])}</small></span>
+    </a>
+    <a class="header-contact-link" href="tel:{site['phone_e164']}" aria-label="Call {e(site['phone'])}">
+      <span class="header-contact-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.2 1.2.4 2.4.6 3.7.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.7 21 3 13.3 3 3.8c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.7.1.4 0 .8-.2 1.1l-2.3 2.2z"/></svg></span>
+      <span class="header-contact-text">{e(site['phone'])}<small>Call the office</small></span>
+    </a>
   </div>
+  <a class="btn header-cta" href="/contact/">Request a Consultation</a>
 </div></header>"""
 
 def footer():
-    hours = "".join(f"<li><span>{e(d)}</span><span>{e(h)}</span></li>" for d, h in site["hours"])
     social = ""
     if site.get("instagram"):
         social += f'<a href="{e(site["instagram"])}" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4zM21.9 7.1c-.1-1.6-.4-3-1.6-4.2S17.6 1.3 16 1.2C14.3 1.1 9.7 1.1 8 1.2c-1.6.1-3 .4-4.2 1.6S2.2 5.5 2.1 7.1C2 8.8 2 13.4 2.1 15.1c.1 1.6.4 3 1.6 4.2s2.6 1.5 4.2 1.6c1.7.1 6.3.1 8 0 1.6-.1 3-.4 4.2-1.6s1.5-2.6 1.6-4.2c.1-1.7.1-6.3.2-8z"/></svg></a>'
@@ -94,26 +97,26 @@ def footer():
     return f"""
 <footer class="site-footer">
   <div class="wrap footer-grid">
-    <div class="f-about">
-      {logo('logo-light')}
-      <p>{e(site['footer_text'])}</p>
-      <div class="social">{social}</div>
-    </div>
-    <div>
+    <div class="footer-nav">
       <p class="f-title">Navigation</p>
       <ul class="f-links">
         <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/services/">Services</a></li>
         <li><a href="/gallery/">Gallery</a></li><li><a href="/specials/">Specials</a></li><li><a href="/contact/">Contact</a></li>
       </ul>
     </div>
-    <div>
-      <p class="f-title">Visit Us</p>
+    <div class="footer-identity" aria-label="Alan T. Tran, M.D. professional credentials">
+      <p class="footer-name">Alan T. Tran, M.D.</p>
+      <img class="footer-mark" src="/assets/img/alan-tran-mark.png" alt="Alan T. Tran monogram" width="79" height="90" loading="lazy">
+      <div class="footer-credentials-crop credential-art">
+        <img src="/assets/img/plastic-surgery-credentials.jpg" alt="Board certification and professional membership emblems" width="550" height="269" loading="lazy">
+      </div>
+    </div>
+    <div class="footer-office">
+      <p class="f-title">Office Info</p>
       <address>{e(site['address_line'])}<br>{e(site['city'])}, {e(site['state'])} {e(site['zip'])}<br>
       <a href="tel:{site['phone_e164']}">{e(site['phone'])}</a><br><a href="mailto:{e(site['email'])}">{e(site['email'])}</a></address>
-    </div>
-    <div>
-      <p class="f-title">Business Hours</p>
-      <ul class="f-hours">{hours}</ul>
+      <p class="footer-hours"><strong>Mon-Fri:</strong> 9:00 AM-5:00 PM</p>
+      <div class="social">{social}</div>
     </div>
   </div>
   <div class="wrap footer-bottom">
@@ -122,7 +125,7 @@ def footer():
   </div>
 </footer>"""
 
-def page(path, title, desc, body, active="", og_img="chatgpt-image-sep-30-2026-12-13-24-am", jsonld=""):
+def page(path, title, desc, body, active="", og_img="dr-alan-tran-practice-hero", jsonld=""):
     full_title = title if "Alan" in title else f"{title} | {site['practice_name']}"
     canonical = BASE + path
     doc = f"""<!DOCTYPE html>
@@ -142,7 +145,7 @@ def page(path, title, desc, body, active="", og_img="chatgpt-image-sep-30-2026-1
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/site.css?v={VERSION}">
 {jsonld}
 </head>
@@ -192,7 +195,7 @@ def cta_band():
 def doctor_band(name):
     return f"""
 <section class="doctor-band"><div class="wrap doctor-band-inner">
-  <img src="{img_url('abt-alan')}" alt="Dr. Alan T. Tran" loading="lazy" width="520" height="520">
+  <img src="{img_url('dr-alan-tran-office-portrait')}" alt="Dr. Alan T. Tran" loading="lazy" width="520" height="520">
   <div><p class="eyebrow">Dr. Alan T. Tran</p><h2>{e(name)} in Fountain Valley, California</h2>
   <p>Board-certified plastic and reconstructive surgeon, serving Orange County since 2000. You will spend quality time with Dr. Tran himself at every visit.</p>
   <a class="btn btn-pink" href="/meet-the-doctor/">Meet Dr. Tran</a></div>
@@ -202,7 +205,7 @@ def ready_band():
     return f"""
 <section class="ready"><div class="wrap ready-inner">
   <p class="eyebrow">Ready when you are</p>
-  <h2>Ready to feel like yourself again?</h2>
+  <h2>Look your best, naturally<sup class="service-mark">℠</sup></h2>
   <div class="ready-actions"><a class="btn btn-pink" href="tel:{site['phone_e164']}">{e(site['phone'])}</a><a class="btn btn-outline" href="mailto:{e(site['email'])}">Email the office</a></div>
 </div></section>"""
 
@@ -236,7 +239,7 @@ def build_service(slug, p):
 <section class="closing"><div class="wrap"><h3>{e(p['closing'])}</h3></div></section>
 <section class="related"><div class="wrap"><p class="eyebrow">More {e(p['category'].lower())} procedures</p><ul class="pill-list">{rel}</ul></div></section>
 {ready_band()}"""
-    page(f"/services/{slug}/", p["title"], p["description"], body, "services", og_img=p.get("hero_img") or "abt-alan")
+    page(f"/services/{slug}/", p["title"], p["description"], body, "services", og_img=p.get("hero_img") or "dr-alan-tran-office-portrait")
 
 # ---------------------------------------------------------------- home
 TESTIMONIALS = [
@@ -249,31 +252,33 @@ TESTIMONIALS = [
 
 def build_home():
     s = site
-    proc = [("01", "Face", ["Rhinoplasty", "Facelift", "Nose Reconstruction"], "/services/rhinoplasty/"),
-            ("02", "Body", ["Abdominoplasty", "Liposuction"], "/services/tummy-tuck-abdominoplasty/"),
-            ("03", "Breast", ["Breast Augmentation", "Breast Reconstruction"], "/services/breast-augmentation/"),
-            ("04", "Reconstruction & Wellness", ["Post Skin Cancer Reconstruction", "Natural Features Enhancement"], "/services/skin-cancer-treatments/")]
-    proc_html = "".join(
-        f'<a class="proc-card" href="{href}"><span class="num">{n}</span><h3>{e(t)}</h3><ul>' +
-        "".join(f"<li>{e(x)}</li>" for x in items) + '</ul><span class="more">Explore →</span></a>'
-        for n, t, items, href in proc)
-    tiles = [("Body", "chatgpt-image-sep-30-2026-12-23-31-am", "/services/#body"),
-             ("Breast", "chatgpt-image-sep-30-2026-12-24-53-am", "/services/#breast"),
-             ("Skin", "chatgpt-image-sep-30-2026-12-27-24-am-e1ea8ff5", "/services/#skin"),
-             ("Face", "chatgpt-image-sep-30-2026-12-26-49-am", "/services/#face")]
-    tiles_html = "".join(f'<a class="tile" href="{h}"><img src="{img_url(i)}" alt="{t} procedures" loading="lazy"></a>' for t, i, h in tiles)
+    tiles = [("Body", "body-contouring-procedures", "/services/#body"),
+             ("Breast", "breast-surgery-procedures", "/services/#breast"),
+             ("Skin", "skin-treatment-procedures", "/services/#skin"),
+             ("Face", "facial-plastic-surgery-procedures", "/services/#face")]
+    tiles_html = "".join(
+        f'<button class="tile{" is-active" if n == 0 else ""}" type="button" data-service-tile="{t.lower()}" '
+        f'aria-controls="tile-panel-{t.lower()}" aria-expanded="{"true" if n == 0 else "false"}">'
+        f'<img src="{img_url(i)}" alt="{t} procedures" loading="lazy"><span>{e(t)}</span></button>'
+        for n, (t, i, h) in enumerate(tiles))
+    tile_panels = "".join(
+        f'<div class="tile-panel{" is-active" if n == 0 else ""}" id="tile-panel-{c.lower()}" data-service-panel="{c.lower()}">'
+        f'<h3>{e(c)} Procedures</h3><ul>' +
+        "".join(f'<li><a href="/services/{slug}/">{e(name)}</a></li>' for slug, name in SERVICES[c]) +
+        f'</ul><a class="tile-all" href="/services/#{c.lower()}">View all {e(c.lower())} procedures</a></div>'
+        for n, c in enumerate(["Body", "Breast", "Skin", "Face"]))
     points = [("Over two decades in Fountain Valley", "Practicing continuously since 2000, refining one philosophy: natural over “done.”"),
               ("Direct time with Dr. Tran", "Consultations are spent with Dr. Tran himself, not handed off to a coordinator."),
               ("A full spectrum of care", "From rhinoplasty and breast augmentation to breast, nose, and post skin cancer reconstruction."),
-              ("Licensed & insured practice", "Serving Fountain Valley, Orange County, and Southern California since 2000."),
+              ("Board-certified plastic surgeon", "Certified by the American Board of Plastic Surgery, with more than two decades of practice in Orange County."),
               ("Your goals set the plan", "The procedure is chosen to fit you, never the other way around.")]
     points_html = "".join(f'<li><span class="pnum">{i+1:02d}</span><div><h4>{e(h)}</h4><p>{e(t)}</p></div></li>' for i, (h, t) in enumerate(points))
     slides = "".join(f'<figure class="slide"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“{e(t)}”</blockquote><figcaption>Verified patient review</figcaption></figure>' for t in TESTIMONIALS)
     dots = "".join(f'<button class="dot" aria-label="Show review {i+1}"></button>' for i in range(len(TESTIMONIALS)))
     # Rotating hero background, same six images and order as the legacy Duda slideshow
-    hero_imgs = ["hero-procedures-collage", "chatgpt-image-sep-30-2026-12-11-17-am",
-                 "chatgpt-image-sep-30-2026-12-13-24-am", "pexels-photo-6303784",
-                 "chatgpt-image-sep-30-2026-12-18-26-am", "chatgpt-image-sep-30-2026-12-19-41-am"]
+    hero_imgs = ["hero-procedures-collage", "plastic-surgery-hero-consultation",
+                 "dr-alan-tran-practice-hero", "plastic-surgery-hero-patient",
+                 "plastic-surgery-hero-natural-results", "orange-county-plastic-surgery-hero"]
     hero_slides = "".join(
         f'<div class="hero-slide is-active" style="background-image:url(\'{img_url(n)}\')"></div>' if i == 0
         else f'<div class="hero-slide" data-bg="{img_url(n)}"></div>'
@@ -283,16 +288,28 @@ def build_home():
   <div class="hero-slides" aria-hidden="true">{hero_slides}</div>
   <div class="wrap hero-inner">
     <p class="hero-tag">{e(s['tagline'])}</p>
-    <h1>Your Best Look, <em>Naturally You</em></h1>
+    <h1>Look your best, <em>Naturally<sup class="service-mark">℠</sup></em></h1>
     <p class="lede">Dr. Alan Tran spends real, unhurried time with every patient, refining rhinoplasty, breast, body and facial procedures toward one goal: results that still look like you.</p>
     <div class="hero-actions"><a class="btn btn-pink" href="/contact/">Request a Consultation</a><a class="btn btn-outline-light" href="/about/">Meet Dr. Tran</a></div>
   </div>
 </section>
 <section class="asps"><div class="wrap"><h2>Member of the American Society of Plastic Surgeons since 2000</h2></div></section>
-<section class="cards3"><div class="wrap cards3-grid">
-  <div class="card"><h3>Over 26 Years of Experience</h3></div>
-  <div class="card"><h3>Special Project: Children Born with Cleft Lip and Palate Since 2002</h3></div>
-  <div class="card"><h3>Trusted by Physicians</h3></div>
+<section class="credentials" aria-labelledby="credentials-title"><div class="wrap credentials-inner">
+  <div><p class="eyebrow">Professional Credentials</p><h2 id="credentials-title">Board-certified plastic surgery expertise</h2>
+  <p>Training, certification, and professional membership support the careful, evidence-based approach Dr. Tran brings to every consultation and procedure.</p></div>
+  <figure class="credential-art"><img src="/assets/img/plastic-surgery-credentials.jpg" alt="Plastic surgery board certification and professional credentials" loading="lazy" width="550" height="269"></figure>
+</div></section>
+<section class="cards3" data-feature-cards><div class="wrap">
+  <div class="cards3-grid">
+    <button class="card is-active" type="button" data-feature-card="experience" aria-controls="feature-experience" aria-expanded="true"><h3>Over 26 Years of Experience</h3></button>
+    <button class="card" type="button" data-feature-card="charity" aria-controls="feature-charity" aria-expanded="false"><h3>Committed to Charitable Causes</h3></button>
+    <button class="card" type="button" data-feature-card="trusted" aria-controls="feature-trusted" aria-expanded="false"><h3>Trusted by Physicians &amp; Insiders</h3></button>
+  </div>
+  <div class="feature-details" aria-live="polite">
+    <div class="feature-detail is-active" id="feature-experience" data-feature-panel="experience"><h3>Serving Orange County since 2000</h3><p>For more than 26 years, Dr. Tran has cared for patients in the local community with personal attention, honest guidance, and results designed to look natural.</p></div>
+    <div class="feature-detail" id="feature-charity" data-feature-panel="charity"><h3>Child Smiles</h3><p>Repairing children born with cleft lip and palate since 2002 through charitable surgical care in the United States and abroad.</p></div>
+    <div class="feature-detail" id="feature-trusted" data-feature-panel="trusted"><h3>Trusted by health care professionals</h3><p>Physicians, nurses, scrub technicians, and other health care professionals choose Dr. Alan Tran for their own care because they value his meticulous technique, thoughtful planning, and natural-looking results.</p></div>
+  </div>
 </div></section>
 <section class="stats"><div class="wrap stats-grid">
   <div><strong>2000</strong><span>Practice Established</span></div>
@@ -301,32 +318,29 @@ def build_home():
   <div><strong>OC</strong><span>Fountain Valley &amp; Orange County</span></div>
 </div></section>
 <section class="welcome"><div class="wrap welcome-grid">
-  <figure class="welcome-img"><img src="{img_url('download-281-29')}" alt="Dr. Alan T. Tran" loading="lazy"></figure>
+  <figure class="welcome-img"><img src="{img_url('dr-alan-tran-portrait')}" alt="Dr. Alan T. Tran" loading="lazy"></figure>
   <div>
     <p class="eyebrow">Welcome</p>
     <h2>A practice built around honest conversation</h2>
     <p>Dr. Tran believes every patient deserves unhurried, personal time with their surgeon. He listens carefully, sets realistic expectations, and designs a plan around what will look natural for you, not a one-size-fits-all result.</p>
     <p class="pull">“Enhancing your natural beauty”</p>
-    <p>You’ll spend real consultation time directly with Dr. Alan Tran, discussing your goals, your options, and what results you can realistically expect — in a setting built to feel supportive, not clinical.</p>
-    <ul class="facts"><li><strong>Est. 2000</strong><span>Practice History</span></li><li><strong>Licensed</strong><span>&amp; Insured</span></li><li><strong>Full Spectrum</strong><span>Cosmetic &amp; Reconstructive</span></li></ul>
+    <p>You’ll spend real consultation time directly with Dr. Alan Tran, discussing your goals, your options, and what results you can realistically expect - in a setting built to feel supportive, not clinical.</p>
   </div>
 </div></section>
-<section class="procedures"><div class="wrap">
+<section class="tiles-sec"><div class="wrap">
   <p class="eyebrow center">Procedures</p>
   <h2 class="center">Care organized around where you want to see change</h2>
-  <p class="center lede-dark">A full range of cosmetic and reconstructive procedures, each approached with the same standard: balance, harmony, and a result that reads as you — just refined.</p>
-  <div class="proc-grid">{proc_html}</div>
-</div></section>
-<section class="tiles-sec"><div class="wrap">
-  <h2 class="center">Welcome to AT Bella Plastic Surgery</h2>
+  <p class="center lede-dark">Explore cosmetic and reconstructive procedures by selecting a category.</p>
   <div class="tiles">{tiles_html}</div>
+  <div class="tile-submenus" aria-live="polite">{tile_panels}</div>
 </div></section>
 <section class="meet"><div class="wrap meet-grid">
-  <figure><img src="{img_url('abt-alan')}" alt="Dr. Alan T. Tran in his office" loading="lazy"></figure>
+  <figure><img src="{img_url('dr-alan-tran-office-portrait')}" alt="Dr. Alan T. Tran in his office" loading="lazy"></figure>
   <div>
     <p class="eyebrow">Meet Dr. Tran</p>
     <h2>Helping you achieve your best natural look</h2>
-    <p class="quote">“When you visit our office, you will spend quality time with me. Your desired appearance and questions about treatment and outcome will be thoroughly addressed. I want you to find me personable and attentive.” <span>— Dr. Alan Tran</span></p>
+    <p class="quote">“When you visit our office, you will spend quality time with me. Your desired appearance and questions about treatment and outcome will be thoroughly addressed. I want you to find me personable and attentive.” <span>- Dr. Alan Tran</span></p>
+    <p>Thoughtful and analytical, Dr. Tran combines artistic judgment, meticulous attention to detail, and individualized planning to help each patient achieve a natural result.</p>
     <ol class="points">{points_html}</ol>
   </div>
 </div></section>
@@ -357,14 +371,14 @@ def build_home():
     </dl>
     <a class="btn btn-pink" href="tel:{s['phone_e164']}">Call to Book</a>
   </div>
-  <figure><img src="{img_url('office-building')}" alt="Our office building at 17931 Euclid St, Fountain Valley" loading="lazy"></figure>
+  <figure><img src="{img_url('fountain-valley-plastic-surgery-office')}" alt="Our office building at 17931 Euclid St, Fountain Valley" loading="lazy"></figure>
 </div></section>
 {ready_band()}"""
     jsonld = f"""<script type="application/ld+json">{json.dumps({
         "@context": "https://schema.org", "@type": "Physician", "name": s["practice_name"], "url": BASE,
         "telephone": s["phone"], "email": s["email"], "medicalSpecialty": "PlasticSurgery",
         "address": {"@type": "PostalAddress", "streetAddress": s["address_line"], "addressLocality": s["city"], "addressRegion": s["state"], "postalCode": s["zip"], "addressCountry": "US"},
-        "openingHours": "Mo-Fr 10:00-18:00", "foundingDate": s["established"], "image": BASE + img_url("abt-alan")})}</script>"""
+        "openingHours": "Mo-Fr 10:00-18:00", "foundingDate": s["established"], "image": BASE + img_url("dr-alan-tran-office-portrait")})}</script>"""
     page("/", "Alan T. Tran, M.D. | Plastic Surgery in Fountain Valley, Orange County",
          "Board-certified plastic and reconstructive surgeon Dr. Alan T. Tran has served Orange County since 2000. Breast, body, skin and facial procedures in Fountain Valley, CA.",
          body, "home", jsonld=jsonld)
@@ -373,10 +387,10 @@ def build_home():
 def build_about():
     a = pages["about"]
     who = "".join(f"<p>{e(x)}</p>" for x in a["who"])
-    body = page_hero("About Dr. Alan Tran", site["tagline"], "chatgpt-image-sep-30-2026-12-13-24-am", "About") + f"""
+    body = page_hero("About Dr. Alan Tran", site["tagline"], "dr-alan-tran-practice-hero", "About") + f"""
 <section class="svc-sec"><div class="wrap svc-split img-right">
-  <div class="prose"><p class="eyebrow">Welcome to our clinic</p><h2>Helping you achieve your best natural look</h2><p class="quote">{e(a['welcome'])}</p><p class="sig">— Dr. Alan Tran</p></div>
-  <figure><img src="{img_url('abt-alan')}" alt="Dr. Alan T. Tran" loading="lazy"></figure>
+  <div class="prose"><p class="eyebrow">Welcome to our clinic</p><h2>Helping you achieve your best natural look</h2><p class="quote">{e(a['welcome'])}</p><p class="sig">- Dr. Alan Tran</p></div>
+  <figure><img src="{img_url('dr-alan-tran-office-portrait')}" alt="Dr. Alan T. Tran" loading="lazy"></figure>
 </div></section>
 <section class="svc-sec alt-bg"><div class="wrap prose prose-narrow"><h2>Who we are</h2>{who}</div></section>
 <section class="related"><div class="wrap"><ul class="pill-list"><li><a href="/meet-the-doctor/">Meet the Doctor</a></li><li><a href="/tour-the-office/">Tour the Office</a></li><li><a href="/services/">Our Procedures</a></li></ul></div></section>
@@ -395,13 +409,13 @@ def build_meet():
     <p class="pull">Let us help you look your best… naturally.</p>
     <a class="btn btn-pink" href="/contact/">Request a Consultation</a>
   </div>
-  <figure><img src="{img_url('download-281-29')}" alt="Dr. Alan T. Tran" loading="lazy"></figure>
+  <figure><img src="{img_url('dr-alan-tran-portrait')}" alt="Dr. Alan T. Tran" loading="lazy"></figure>
 </div></section>
 {cta_band()}"""
     page("/meet-the-doctor/", "Meet Dr. Alan T. Tran", "Meet Dr. Alan T. Tran, a third-generation physician board certified in Plastic Surgery and General Surgery.", body, "about")
 
 def build_tour():
-    photos = [("download-2", "Our office at 17931 Euclid St, Fountain Valley"), ("abt-alan", "Dr. Tran in the office")]
+    photos = [("fountain-valley-plastic-surgery-office", "Our office at 17931 Euclid St, Fountain Valley"), ("dr-alan-tran-office-portrait", "Dr. Tran in the office")]
     figs = "".join(f'<figure><img src="{img_url(i)}" alt="{e(a)}" loading="lazy"><figcaption>{e(a)}</figcaption></figure>' for i, a in photos)
     body = page_hero("Tour the Office", f"{site['address_line']}, {site['city']}, {site['state']} {site['zip']}", None, "About") + f"""
 <section class="svc-sec"><div class="wrap">
