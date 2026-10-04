@@ -79,3 +79,29 @@
   start();
   document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
 })();
+
+
+// Homepage service tiles and feature cards: reveal on hover, keyboard focus, or click.
+(function () {
+  function bindGroup(buttonSelector, panelSelector, buttonKey, panelKey) {
+    var buttons = Array.prototype.slice.call(document.querySelectorAll(buttonSelector));
+    var panels = Array.prototype.slice.call(document.querySelectorAll(panelSelector));
+    if (!buttons.length || !panels.length) return;
+    function show(key) {
+      buttons.forEach(function (b) {
+        var active = b.getAttribute(buttonKey) === key;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-expanded', active ? 'true' : 'false');
+      });
+      panels.forEach(function (p) { p.classList.toggle('is-active', p.getAttribute(panelKey) === key); });
+    }
+    buttons.forEach(function (b) {
+      var activate = function () { show(b.getAttribute(buttonKey)); };
+      b.addEventListener('mouseenter', activate);
+      b.addEventListener('focus', activate);
+      b.addEventListener('click', activate);
+    });
+  }
+  bindGroup('[data-service-tile]', '[data-service-panel]', 'data-service-tile', 'data-service-panel');
+  bindGroup('[data-feature-card]', '[data-feature-panel]', 'data-feature-card', 'data-feature-panel');
+})();

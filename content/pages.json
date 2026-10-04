@@ -5,7 +5,7 @@
   "name": "Breast Augmentation",
   "title": "Breast Augmentation",
   "description": "Breast Augmentation with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "7be6cf1c-34d5-415b-8443-27292cd6c09f-b727a7ca-45f50d0a",
+  "hero_img": "breast-augmentation-consultation-hero",
   "sections": [
    [
     {
@@ -16,7 +16,7 @@
    [
     {
      "t": "img",
-     "src": "pexels-photo-8935401",
+     "src": "breast-augmentation-recovery-results",
      "alt": ""
     },
     {
@@ -122,7 +122,7 @@
     },
     {
      "t": "img",
-     "src": "2-6-",
+     "src": "breast-augmentation-procedure",
      "alt": ""
     }
    ],
@@ -163,7 +163,7 @@
     },
     {
      "t": "img",
-     "src": "1-9-",
+     "src": "breast-surgery-consultation",
      "alt": ""
     },
     {
@@ -215,7 +215,7 @@
   "name": "Breast Lift",
   "title": "Breast Lift",
   "description": "Breast Lift with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "chatgpt-image-sep-22-2026-07-41-17-pm",
+  "hero_img": "breast-lift-consultation-hero",
   "sections": [
    [
     {
@@ -230,7 +230,7 @@
    [
     {
      "t": "img",
-     "src": "chatgpt-image-sep-22-2026-07-43-03-pm",
+     "src": "breast-surgery-natural-results",
      "alt": ""
     },
     {
@@ -338,7 +338,7 @@
    [
     {
      "t": "img",
-     "src": "b1ec86a7-d06a-49c6-97f9-5055786f9649-f4fdb4ac",
+     "src": "breast-lift-procedure",
      "alt": ""
     },
     {
@@ -367,7 +367,7 @@
   "name": "Breast Reduction",
   "title": "Breast Reduction",
   "description": "Breast Reduction with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "chatgpt-image-sep-22-2026-07-55-28-pm",
+  "hero_img": "breast-reduction-consultation-hero",
   "sections": [
    [
     {
@@ -382,7 +382,7 @@
    [
     {
      "t": "img",
-     "src": "1-9-",
+     "src": "breast-surgery-consultation",
      "alt": ""
     },
     {
@@ -474,7 +474,7 @@
    [
     {
      "t": "img",
-     "src": "chatgpt-image-sep-22-2026-08-01-29-pm",
+     "src": "breast-reduction-procedure",
      "alt": ""
     },
     {
@@ -503,7 +503,7 @@
   "name": "Breast Revision",
   "title": "Breast Revision",
   "description": "Breast Revision with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "chatgpt-image-sep-22-2026-08-08-06-pm",
+  "hero_img": "breast-revision-consultation-hero",
   "sections": [
    [
     {
@@ -518,7 +518,7 @@
    [
     {
      "t": "img",
-     "src": "chatgpt-image-sep-22-2026-08-08-06-pm",
+     "src": "breast-revision-consultation-hero",
      "alt": ""
     },
     {
@@ -617,7 +617,7 @@
    [
     {
      "t": "img",
-     "src": "chatgpt-image-sep-22-2026-07-43-03-pm",
+     "src": "breast-surgery-natural-results",
      "alt": ""
     },
     {
@@ -646,7 +646,7 @@
   "name": "Breast Reconstruction",
   "title": "Breast Reconstruction",
   "description": "Breast Reconstruction with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-9486596",
+  "hero_img": "breast-reconstruction-consultation-hero",
   "sections": [
    [
     {
@@ -661,7 +661,7 @@
    [
     {
      "t": "img",
-     "src": "35ea1585-9959-47b8-affe-66de4521d899",
+     "src": "breast-reconstruction-procedure",
      "alt": ""
     },
     {
@@ -767,7 +767,7 @@
    [
     {
      "t": "img",
-     "src": "1-9-",
+     "src": "breast-surgery-consultation",
      "alt": ""
     },
     {
@@ -796,7 +796,7 @@
   "name": "Breast Lumpectomy",
   "title": "Breast Lumpectomy",
   "description": "Breast Lumpectomy with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-9486596",
+  "hero_img": "breast-reconstruction-consultation-hero",
   "sections": [
    [
     {
@@ -811,7 +811,7 @@
    [
     {
      "t": "img",
-     "src": "33ba03e1-1813-464b-be54-38ad02b4214d",
+     "src": "breast-lumpectomy-recovery",
      "alt": ""
     },
     {
@@ -896,7 +896,7 @@
    [
     {
      "t": "img",
-     "src": "2-5-",
+     "src": "breast-lumpectomy-procedure",
      "alt": ""
     },
     {
@@ -925,7 +925,7 @@
   "name": "Tummy Tuck (Abdominoplasty)",
   "title": "Tummy Tuck (Abdominoplasty)",
   "description": "Tummy Tuck (Abdominoplasty) with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-15071268",
+  "hero_img": "body-contouring-consultation-hero",
   "sections": [
    [
     {
@@ -950,7 +950,7 @@
    [
     {
      "t": "img",
-     "src": "pexels-photo-6995855",
+     "src": "tummy-tuck-procedure",
      "alt": ""
     },
     {
@@ -1048,7 +1048,7 @@
    [
     {
      "t": "img",
-     "src": "chatgpt-image-sep-24-2026-07-58-23-pm",
+     "src": "tummy-tuck-recovery-results",
      "alt": ""
     },
     {
@@ -1076,7 +1076,7 @@
   "name": "Liposuction",
   "title": "Liposuction",
   "description": "Liposuction with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-7772639",
+  "hero_img": "liposuction-body-contouring-hero",
   "sections": [
    [
     {
@@ -1100,7 +1100,7 @@
    [
     {
      "t": "img",
-     "src": "pexels-photo-19782383",
+     "src": "body-contouring-treatment",
      "alt": ""
     },
     {
@@ -1220,7 +1220,7 @@
   "name": "Body Contouring",
   "title": "Body Contouring",
   "description": "Body Contouring with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-7772639",
+  "hero_img": "liposuction-body-contouring-hero",
   "sections": [
    [
     {
@@ -1244,7 +1244,7 @@
    [
     {
      "t": "img",
-     "src": "pexels-photo-19782383",
+     "src": "body-contouring-treatment",
      "alt": ""
     },
     {
@@ -1364,7 +1364,7 @@
   "name": "Fat Transfer/Grafting",
   "title": "Fat Transfer/Grafting",
   "description": "Fat Transfer/Grafting with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-15071268",
+  "hero_img": "body-contouring-consultation-hero",
   "sections": [
    [
     {
@@ -1379,7 +1379,7 @@
    [
     {
      "t": "img",
-     "src": "pexels-photo-7298670",
+     "src": "fat-transfer-procedure",
      "alt": ""
     },
     {
@@ -1513,7 +1513,7 @@
   "name": "Brazilian Butt Lift (Fat Grafting)",
   "title": "Brazilian Butt Lift (Fat Grafting)",
   "description": "Brazilian Butt Lift (Fat Grafting) with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-8788779",
+  "hero_img": "brazilian-butt-lift-consultation-hero",
   "sections": [
    [
     {
@@ -1657,7 +1657,7 @@
   "name": "Butt Lift (Traditional Excision)",
   "title": "Butt Lift (Traditional Excision)",
   "description": "Butt Lift (Traditional Excision) with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-8788774",
+  "hero_img": "traditional-butt-lift-consultation-hero",
   "sections": [
    [
     {
@@ -1777,7 +1777,7 @@
   "name": "Thigh Lift",
   "title": "Thigh Lift",
   "description": "Thigh Lift with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-12645032",
+  "hero_img": "thigh-lift-consultation-hero",
   "sections": [
    [
     {
@@ -1909,7 +1909,7 @@
   "name": "Arm Lift",
   "title": "Arm Lift",
   "description": "Arm Lift with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-806681",
+  "hero_img": "arm-lift-consultation-hero",
   "sections": [
    [
     {
@@ -2033,7 +2033,7 @@
   "name": "Body Implants",
   "title": "Body Implants",
   "description": "Body Implants with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-19782383",
+  "hero_img": "body-contouring-treatment",
   "sections": [
    [
     {
@@ -2162,7 +2162,7 @@
   "name": "Injectables & Fillers",
   "title": "Injectables & Fillers",
   "description": "Injectables & Fillers with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-34220539",
+  "hero_img": "injectables-fillers-consultation-hero",
   "sections": [
    [
     {
@@ -2256,7 +2256,7 @@
   "name": "Earlobe Repair",
   "title": "Earlobe Repair",
   "description": "Earlobe Repair with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-8092973",
+  "hero_img": "earlobe-repair-consultation-hero",
   "sections": [
    [
     {
@@ -2409,7 +2409,7 @@
   "name": "Keloid Scar Treatment",
   "title": "Keloid Scar Treatment",
   "description": "Keloid Scar Treatment with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-17040762",
+  "hero_img": "keloid-scar-treatment-hero",
   "sections": [
    [
     {
@@ -2557,7 +2557,7 @@
   "name": "Skin Cancer Treatment",
   "title": "Skin Cancer Treatment",
   "description": "Skin Cancer Treatment with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-5701545",
+  "hero_img": "skin-cancer-reconstruction-hero",
   "sections": [
    [
     {
@@ -2713,7 +2713,7 @@
   "name": "Skin Tightening",
   "title": "Skin Tightening",
   "description": "Skin Tightening with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-4586756",
+  "hero_img": "skin-tightening-consultation-hero",
   "sections": [
    [
     {
@@ -2861,7 +2861,7 @@
   "name": "Eyelid Surgery",
   "title": "Eyelid Surgery",
   "description": "Eyelid Surgery with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-7585317",
+  "hero_img": "eyelid-surgery-hero",
   "sections": [
    [
     {
@@ -2908,14 +2908,14 @@
     },
     {
      "t": "img",
-     "src": "gemini-generated-image-wmnmqtwmnmqtwmnm-bc56b146-232df223",
+     "src": "eyelid-surgery-recovery-results",
      "alt": ""
     }
    ],
    [
     {
      "t": "img",
-     "src": "1-2-",
+     "src": "eyelid-surgery-procedure",
      "alt": ""
     },
     {
@@ -3013,7 +3013,7 @@
     },
     {
      "t": "img",
-     "src": "gemini-generated-image-k78f9wk78f9wk78f",
+     "src": "eyelid-surgery-consultation",
      "alt": ""
     }
    ]
@@ -3026,7 +3026,7 @@
   "name": "Rhinoplasty",
   "title": "Rhinoplasty",
   "description": "Rhinoplasty with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-7298697",
+  "hero_img": "rhinoplasty-consultation-hero",
   "sections": [
    [
     {
@@ -3097,7 +3097,7 @@
     },
     {
      "t": "img",
-     "src": "954082b9-87b8-4150-b11a-3b2e84e98855",
+     "src": "rhinoplasty-recovery-results",
      "alt": ""
     }
    ],
@@ -3163,7 +3163,7 @@
    [
     {
      "t": "img",
-     "src": "02b371f1-c8a0-4b06-b0bc-596f7020461e",
+     "src": "rhinoplasty-procedure-overview",
      "alt": ""
     },
     {
@@ -3196,7 +3196,7 @@
   "name": "Face Lift",
   "title": "Face Lift",
   "description": "Face Lift with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "face-lift-hero",
+  "hero_img": "facelift-surgery-hero",
   "sections": [
    [
     {
@@ -3266,7 +3266,7 @@
     },
     {
      "t": "img",
-     "src": "3d0361b1-f148-4fcc-abb8-3857717e2618",
+     "src": "facelift-recovery-results",
      "alt": ""
     }
    ],
@@ -3328,7 +3328,7 @@
    [
     {
      "t": "img",
-     "src": "2-282-29",
+     "src": "facelift-procedure-overview",
      "alt": ""
     },
     {
@@ -3361,7 +3361,7 @@
   "name": "Neck Lift",
   "title": "Neck Lift",
   "description": "Neck Lift with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "261eb73c-cfc5-45bb-bec8-4643738e1ab2",
+  "hero_img": "neck-lift-consultation-hero",
   "sections": [
    [
     {
@@ -3426,7 +3426,7 @@
     },
     {
      "t": "img",
-     "src": "76600d10-4f50-439b-9287-a0f7bcf95b9f",
+     "src": "neck-lift-procedure",
      "alt": ""
     }
    ],
@@ -3488,7 +3488,7 @@
    [
     {
      "t": "img",
-     "src": "pexels-photo-7462605",
+     "src": "neck-lift-recovery-results",
      "alt": ""
     },
     {
@@ -3521,7 +3521,7 @@
   "name": "Brow Lift",
   "title": "Brow Lift",
   "description": "Brow Lift with Dr. Alan T. Tran in Fountain Valley, Orange County. Book your consultation today!",
-  "hero_img": "pexels-photo-5046577",
+  "hero_img": "brow-lift-consultation-hero",
   "sections": [
    [
     {
@@ -3586,7 +3586,7 @@
     },
     {
      "t": "img",
-     "src": "e9750f93-b734-4b27-9bd4-868484c4ad64",
+     "src": "brow-lift-procedure",
      "alt": ""
     }
    ],
@@ -3648,7 +3648,7 @@
    [
     {
      "t": "img",
-     "src": "pexels-photo-3373714",
+     "src": "brow-lift-recovery-results",
      "alt": ""
     },
     {
@@ -3679,51 +3679,51 @@
   "kind": "gallery",
   "title": "Gallery",
   "images": [
-   "image-32",
-   "image-31",
-   "image-30",
-   "image-21",
-   "image-17",
-   "image-20",
-   "image-16",
-   "image-15",
-   "image-127",
-   "image-126",
-   "image-124",
-   "image-125",
-   "image-123",
-   "image-122",
-   "image-118",
-   "image-117",
-   "image-116",
-   "image-115",
-   "image-114",
-   "image-113",
-   "image-112",
-   "image-111",
-   "image-102",
-   "image-112-1920w-1-",
-   "image-102-1920w-1-",
-   "image-111-1920w-1-",
-   "image-101",
-   "image-100",
-   "2-2-75e5ba32",
-   "4-1-07e4cde4",
-   "1-2-a3896d21",
-   "3-2-04e70669",
-   "6-2384f194",
-   "5-cb8af1a1",
-   "fillers",
-   "20191011-165938crop-before-logo-combo-afaf7472",
-   "20191011-165903-before-with-flash-rev-logo-combo-502914b3",
-   "ear-keloid-scar-revision",
-   "ear-keloid-removal-scar-revision",
-   "imgp0078-before-with-flash-rev-logo-cover-1-2032df31",
-   "20190212-115309-rev-logo-cover-combo-8dac3d0c",
-   "20190815-145922crop-cov-combo-logo-adae65bd",
-   "dscn0149-cov-combo-logo-40e8e675",
-   "20190815-145913crop-cov-combo-logo-23bf9f57",
-   "20190815-145856crop-cov-combo-logo-03bdbba3"
+   "breast-augmentation-before-after-01",
+   "breast-augmentation-before-after-02",
+   "breast-augmentation-before-after-03",
+   "breast-augmentation-before-after-04",
+   "breast-augmentation-before-after-05",
+   "breast-augmentation-before-after-06",
+   "breast-augmentation-before-after-07",
+   "breast-augmentation-before-after-08",
+   "breast-augmentation-before-after-09",
+   "breast-augmentation-before-after-10",
+   "breast-augmentation-before-after-11",
+   "breast-augmentation-before-after-12",
+   "breast-augmentation-before-after-13",
+   "breast-augmentation-before-after-14",
+   "breast-augmentation-before-after-15",
+   "breast-augmentation-before-after-16",
+   "breast-augmentation-before-after-17",
+   "breast-augmentation-before-after-18",
+   "breast-augmentation-before-after-19",
+   "breast-augmentation-before-after-20",
+   "breast-augmentation-before-after-21",
+   "breast-augmentation-before-after-22",
+   "breast-augmentation-before-after-23",
+   "breast-augmentation-before-after-24",
+   "breast-augmentation-before-after-25",
+   "breast-augmentation-before-after-26",
+   "breast-augmentation-before-after-27",
+   "breast-augmentation-before-after-28",
+   "upper-eyelid-surgery-before-after-01",
+   "upper-eyelid-surgery-before-after-02",
+   "upper-eyelid-surgery-before-after-03",
+   "upper-eyelid-surgery-before-after-04",
+   "upper-eyelid-surgery-before-after-05",
+   "upper-eyelid-surgery-before-after-06",
+   "dermal-fillers-before-after",
+   "nose-scar-revision-before-after-01",
+   "nose-scar-revision-before-after-02",
+   "ear-keloid-scar-revision-before-after",
+   "ear-keloid-removal-before-after",
+   "cleft-lip-palate-revision-before-after-01",
+   "cleft-lip-palate-revision-before-after-02",
+   "cleft-lip-palate-revision-before-after-03",
+   "cleft-lip-palate-revision-before-after-04",
+   "cleft-lip-palate-revision-before-after-05",
+   "cleft-lip-palate-revision-before-after-06"
   ],
   "categories": [
    "Breast Augmentation",
