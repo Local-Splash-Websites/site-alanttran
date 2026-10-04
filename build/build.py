@@ -271,7 +271,7 @@ def build_home():
     slides = "".join(f'<figure class="slide"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“{e(t)}”</blockquote><figcaption>Verified patient review</figcaption></figure>' for t in TESTIMONIALS)
     dots = "".join(f'<button class="dot" aria-label="Show review {i+1}"></button>' for i in range(len(TESTIMONIALS)))
     # Rotating hero background, same six images and order as the legacy Duda slideshow
-    hero_imgs = ["chatgpt-image-sep-30-2026-12-15-44-am", "chatgpt-image-sep-30-2026-12-11-17-am",
+    hero_imgs = ["hero-procedures-collage", "chatgpt-image-sep-30-2026-12-11-17-am",
                  "chatgpt-image-sep-30-2026-12-13-24-am", "pexels-photo-6303784",
                  "chatgpt-image-sep-30-2026-12-18-26-am", "chatgpt-image-sep-30-2026-12-19-41-am"]
     hero_slides = "".join(
