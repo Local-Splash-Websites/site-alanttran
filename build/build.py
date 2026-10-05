@@ -63,6 +63,7 @@ def nav(active):
     <li class="has-sub has-mega">{a('/services/', 'Services', 'services')}<button class="sub-toggle" aria-label="Show Services menu" aria-expanded="false"></button>
       <div class="sub mega">{mega}</div></li>
     <li>{a('/gallery/', 'Gallery', 'gallery')}</li>
+    <li>{a('/testimonials/', 'Testimonials', 'testimonials')}</li>
     <li>{a('/specials/', 'Specials', 'specials')}</li>
     <li>{a('/contact/', 'Contact', 'contact')}</li>
   </ul>
@@ -101,7 +102,7 @@ def footer():
       <p class="f-title">Navigation</p>
       <ul class="f-links">
         <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/services/">Services</a></li>
-        <li><a href="/gallery/">Gallery</a></li><li><a href="/specials/">Specials</a></li><li><a href="/contact/">Contact</a></li>
+        <li><a href="/gallery/">Gallery</a></li><li><a href="/testimonials/">Testimonials</a></li><li><a href="/specials/">Specials</a></li><li><a href="/contact/">Contact</a></li>
       </ul>
     </div>
     <div class="footer-identity" aria-label="Alan T. Tran, M.D. professional credentials">
@@ -357,7 +358,7 @@ def build_home():
   <div class="stars">★★★★★</div>
   <h2>Real feedback from real patients across Orange County</h2>
   <p>We’re proud of how patients describe their experience with our practice. Read verified reviews, or share your own after your visit.</p>
-  <div class="ready-actions center"><a class="btn btn-white" href="{e(s['reviews_url'])}" target="_blank" rel="noopener">Read Patient Reviews</a><a class="btn btn-outline-light" href="{e(s['google_review_url'])}" target="_blank" rel="noopener">Leave a Review</a></div>
+  <div class="ready-actions center"><a class="btn btn-white" href="/testimonials/">Read Patient Reviews</a><a class="btn btn-outline-light" href="https://ratemy.pro/Alan" target="_blank" rel="noopener" data-review-popup>Leave a Review</a></div>
 </div></section>
 <section class="visit"><div class="wrap visit-grid">
   <div>
@@ -454,6 +455,29 @@ def build_gallery():
 {cta_band()}"""
     page("/gallery/", "Before & After Gallery", "Before and after photos of patients of Dr. Alan T. Tran, Fountain Valley plastic surgeon.", body, "gallery")
 
+
+REVIEWS = [
+    ("Kelly T.", "Westminster, CA", "Dr. Alan T Tran is a very good surgeon! He is so good and I am proud of him. He did my surgery and it was absolutely good. He was the best surgeon in the world. I like him being my surgeon!!!! Thank you very much for doing my surgery!!!!"),
+    ("Shane G.", "Anaheim, CA", "Dr. Tran is an amazing surgeon. His attention to detail and making sure his patients are satisfied with the results is what makes him and his office successful. He does amazing breast reconstruction and cosmetic surgery. He takes the time to explain all of the options and his reasoning for choosing his products of choice for your specific needs."),
+    ("Marcos L.", "Aliso Viejo, CA", "You think the best Dr. for nose jobs is in Hollywood or Newport Beach?! Nope! Alan Tran knocks around in the medical underground in Westminster. By far a superb and meticulous Dr. He takes his time and ensures everything is and will be correct w/ your nose. Staff was an 11 out of 10 Dr. Tran is concise w/ how he will proceed w/ the surgery and how he will ensure, he will make everything better to best of his ability. Dr. Tran goes about his occupation like art, pristine, will take his time, and will fix your structural being in Channel glasses and Gucci flip flops. I am extremely pleased w/ the end result and would recommend Dr. Tran to anyone looking to fix their nose."),
+    ("Sandy S.", "Federal Way, WA", "Dr. Tran is great!! I’m amazed with his work. I can’t get over how meticulous he is. He is such a sweet, caring, and easy-going surgeon. He doesn’t rush you out the office to take another patient in. Every visit I had his undivided attention. He explained everything in details. And if I asked the same question twice, no biggie. Great person and MD!!!"),
+]
+
+def build_testimonials():
+    cards = "".join(
+        f'<article class="review-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div>'
+        f'<blockquote>“{e(quote)}”</blockquote><p class="review-by">{e(name)}<small>{e(place)}</small></p></article>'
+        for name, place, quote in REVIEWS)
+    body = page_hero("Patient Testimonials", "Real stories from patients who have transformed their lives through expert care and personalized surgical solutions.", None, "Patient Journeys with Dr. Tran") + f"""
+<section class="svc-sec"><div class="wrap">
+  <p class="eyebrow center">Patient Stories and Feedback</p>
+  <h2 class="center">What patients say about Dr. Tran</h2>
+  <div class="review-list">{cards}</div>
+  <div class="ready-actions center review-actions"><a class="btn btn-pink" href="https://ratemy.pro/Alan" target="_blank" rel="noopener" data-review-popup>Leave a Review</a><a class="btn btn-outline" href="/contact/">Request a Consultation</a></div>
+</div></section>
+{cta_band()}"""
+    page("/testimonials/", "Patient Testimonials", "Patient stories and reviews of Dr. Alan T. Tran, plastic surgeon in Fountain Valley, Orange County.", body, "testimonials")
+
 def build_specials():
     body = page_hero("Specials", "Current offers from our office", None) + f"""
 <section class="svc-sec"><div class="wrap prose prose-narrow center">
@@ -465,9 +489,9 @@ def build_specials():
 
 def contact_form(svc_options):
     return f"""
-<form class="contact-form" action="/contact.php" method="post">
+<form class="contact-form" action="/lead-webhook" method="post" data-lead-form novalidate>
   <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-  <input type="hidden" name="ts" value="">
+  <div class="form-status" role="status" aria-live="polite"></div>
   <div class="row2">
     <label>Full name<input type="text" name="name" required maxlength="100" autocomplete="name"></label>
     <label>Phone<input type="tel" name="phone" maxlength="30" autocomplete="tel"></label>
@@ -532,7 +556,7 @@ def main():
     for slug, p in pages.items():
         if p["kind"] == "service":
             build_service(slug, p)
-    build_gallery(); build_specials(); build_contact(); build_thanks(); build_privacy(); build_404()
+    build_gallery(); build_testimonials(); build_specials(); build_contact(); build_thanks(); build_privacy(); build_404()
     today = datetime.date.today().isoformat()
     sm = "".join(f"<url><loc>{BASE}{p}</loc><lastmod>{today}</lastmod></url>" for p in SITEMAP if p != "/thank-you/")
     (OUT / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{sm}</urlset>\n')

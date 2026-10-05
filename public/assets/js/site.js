@@ -44,14 +44,62 @@
     });
   }
 
-  document.querySelectorAll('.contact-form input[name="ts"]').forEach(function (t) { t.value = Math.floor(Date.now() / 1000); });
-  var q = new URLSearchParams(location.search).get('error');
-  var form = document.querySelector('.contact-form');
-  if (q && form) {
-    var m = document.createElement('p'); m.className = 'form-msg';
-    m.textContent = q === 'rate' ? 'Too many messages from your connection. Please call us instead.' : 'Sorry, your message could not be sent. Please check the form or call the office.';
-    form.prepend(m);
-  }
+  document.querySelectorAll('[data-review-popup]').forEach(function (a) {
+    a.addEventListener('click', function (ev) {
+      var popup = window.open(a.href, 'leaveReview', 'popup=yes,width=520,height=760');
+      if (popup) ev.preventDefault();
+    });
+  });
+
+  document.querySelectorAll('[data-lead-form]').forEach(function (form) {
+    var status = form.querySelector('.form-status');
+    var button = form.querySelector('[type="submit"]');
+    function show(ok, text) {
+      status.textContent = text;
+      status.className = 'form-status form-msg' + (ok ? ' is-ok' : '');
+    }
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      var data = new FormData(form);
+      var procedure = (data.get('service') || '').toString().trim();
+      var note = (data.get('message') || '').toString().trim();
+      var message = procedure ? ('Procedure of interest: ' + procedure + '\n\n' + note) : note;
+      var fields = [
+        ['name', data.get('name'), 'text'],
+        ['email', data.get('email'), 'email'],
+        ['phone', data.get('phone'), 'tel'],
+        ['message', message, 'textarea']
+      ];
+      if ((data.get('website') || '').toString()) fields.push(['website', data.get('website'), 'text']);
+      var payload = {
+        event_type: 'CONTACT_FORM_SENT_V2',
+        event_timestamp: Math.floor(Date.now() / 1000),
+        resource_data: { site_name: '20e7336c' },
+        data: { fieldsData: fields.map(function (f) {
+          return { field_label: f[0], field_value: (f[1] || '').toString(), field_type: f[2], field_key: f[0], field_id: f[0] };
+        }) }
+      };
+      button.disabled = true;
+      show(true, 'Sending…');
+      fetch('/lead-webhook', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      }).then(function (res) {
+        return res.json().catch(function () { return {}; }).then(function (body) {
+          if (res.ok && body.ok !== false) {
+            show(true, body.message || 'We got it. Thank you for contacting us. We’ll get back to you as soon as possible.');
+            form.reset();
+          } else {
+            show(false, body.message || 'That didn’t work. The form wasn’t sent. Please try again.');
+          }
+        });
+      }).catch(function () {
+        show(false, 'That didn’t work. The form wasn’t sent. Please try again.');
+      }).then(function () { button.disabled = false; });
+    });
+  });
 })();
 
 // Rotating hero background: crossfades every 5 seconds, loads each image just before it's shown,

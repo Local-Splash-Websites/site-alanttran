@@ -9,6 +9,9 @@ RewriteEngine On
 # HTTP -> HTTPS redirect is added to the Apache vhost by certbot (ENABLE_HTTPS=true),
 # so the site still works over plain http before a certificate exists.
 
+# Same-origin contact proxy. Browser posts Duda-style JSON here; PHP forwards it.
+RewriteRule ^lead-webhook/?$ /lead-webhook.php [L]
+
 # Add trailing slash to directory-style URLs
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}/index.html -f
@@ -17,13 +20,34 @@ RewriteRule ^(.*[^/])$ /$1/ [L,R=301]
 # Old WordPress URLs (alantran-plastic-surgery.com) -> new pages
 RewriteRule ^about-us/?$ /about/ [L,R=301]
 RewriteRule ^(contact-us|book-an-appointment)/?$ /contact/ [L,R=301]
-RewriteRule ^testimonials/?$ /#testimonials [L,R=301,NE]
+RewriteRule ^services/facelift/?$ /services/face-lift/ [L,R=301]
 RewriteRule ^services/skin-cancer-treatment/?$ /services/skin-cancer-treatments/ [L,R=301]
 RewriteRule ^(services/)?nipple-reduction/?$ /services/ [L,R=301]
+RewriteRule ^testimonials-home(/.*)?$ /testimonials/ [L,R=301]
+RewriteRule ^testimonials/page(/.*)?$ /testimonials/ [L,R=301]
 RewriteRule ^(feed|comments/feed|wp-json|wp-admin|wp-login\.php|xmlrpc\.php)(/.*)?$ - [G]
 
-# Old Duda paths (in case anyone linked the preview) e.g. /fat-transfer_grafting
-RewriteRule ^(about|contact|gallery|specials|services|tour-the-office|meet-the-doctor|privacy-policy)$ /$1/ [L,R=301]
+# Old Duda paths (indexed on dralantran.org) plus earlier preview slugs
+RewriteRule ^(about|contact|gallery|specials|services|tour-the-office|meet-the-doctor|privacy-policy|testimonials)$ /$1/ [L,R=301]
+RewriteRule ^about-dr-alan-tran/?$ /meet-the-doctor/ [L,R=301]
+RewriteRule ^patient-testimonials/?$ /testimonials/ [L,R=301]
+RewriteRule ^contact---location/?$ /contact/ [L,R=301]
+RewriteRule ^before---after-gallery/?$ /gallery/ [L,R=301]
+RewriteRule ^brazilian-butt-lift/?$ /services/brazilian-butt-lift-fat-grafting/ [L,R=301]
+RewriteRule ^fat-transfer/grafting/?$ /services/fat-transfer-grafting/ [L,R=301]
+RewriteRule ^fat-transfer/breast-augmentation/?$ /services/breast-augmentation/ [L,R=301]
+RewriteRule ^fat-transfer/breast-lift/?$ /services/breast-lift/ [L,R=301]
+RewriteRule ^fat-transfer/breast-reduction/?$ /services/breast-reduction/ [L,R=301]
+RewriteRule ^fat-transfer/breast-revision/?$ /services/breast-revision/ [L,R=301]
+RewriteRule ^fat-transfer/breast-reconstruction/?$ /services/breast-reconstruction/ [L,R=301]
+RewriteRule ^fat-transfer/breast-lumpectomy/?$ /services/breast-lumpectomy/ [L,R=301]
+RewriteRule ^fat-transfer/nipple-reduction/?$ /services/ [L,R=301]
+RewriteRule ^fat-transfer/arm-lift/?$ /services/arm-lift/ [L,R=301]
+RewriteRule ^fat-transfer/body-implants/?$ /services/body-implants/ [L,R=301]
+RewriteRule ^fat-transfer/thigh-lift/?$ /services/thigh-lift/ [L,R=301]
+RewriteRule ^fat-transfer/butt-lift--traditional-excision/?$ /services/butt-lift-traditional-excision/ [L,R=301]
+RewriteRule ^new-pagea1c7b218/?$ / [L,R=301]
+RewriteRule ^new-page/?$ / [L,R=301]
 RewriteRule ^fat-transfer_grafting/?$ /services/fat-transfer-grafting/ [L,R=301]
 RewriteRule ^tummy-tuck--abdominoplasty/?$ /services/tummy-tuck-abdominoplasty/ [L,R=301]
 RewriteRule ^brazilian-butt-lift--fat-grafting/?$ /services/brazilian-butt-lift-fat-grafting/ [L,R=301]
