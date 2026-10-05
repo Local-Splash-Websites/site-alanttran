@@ -77,21 +77,22 @@ if ($body === false) {
     respond(500, false, 'That didn’t work. The form wasn’t sent. Please try again.');
 }
 
-$ch = curl_init(WEBHOOK_URL);
-curl_setopt_array($ch, [
-    CURLOPT_POST => true,
-    CURLOPT_POSTFIELDS => $body,
-    CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Accept: application/json'],
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_TIMEOUT => 15,
-    CURLOPT_CONNECTTIMEOUT => 8,
+$ctx = stream_context_create([
+    'http' => [
+        'method' => 'POST',
+        'header' => "Content-Type: application/json\r\nAccept: application/json\r\n",
+        'content' => $body,
+        'timeout' => 15,
+        'ignore_errors' => true,
+    ],
 ]);
-$resp = curl_exec($ch);
-$code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-$err = curl_error($ch);
-curl_close($ch);
+$resp = @file_get_contents(WEBHOOK_URL, false, $ctx);
+$code = 0;
+foreach ($http_response_header ?? [] as $header) {
+    if (preg_match('#^HTTP/\S+\s+(\d+)#', $header, $m)) $code = (int)$m[1];
+}
 if ($resp === false || $code < 200 || $code >= 300) {
-    error_log('lead-webhook: forward failed http=' . $code . ' err=' . $err);
+    error_log('lead-webhook: forward failed http=' . $code);
     respond(502, false, 'That didn’t work. The form wasn’t sent. Please try again.');
 }
 
