@@ -384,3 +384,13 @@ p{margin:0 0 1em}
 .footer-office .social{justify-content:flex-end}
 @media(max-width:700px){.tile-panel ul{grid-template-columns:1fr}.feature-details,.tile-panel{padding:24px 20px}}
 @media(max-width:600px){.footer-office{text-align:center}.footer-office .social{justify-content:center}}
+
+.review-list{display:grid;gap:22px;max-width:860px;margin:28px auto 0}
+.review-card{background:#fff;border:1px solid #E7E0E4;border-radius:16px;padding:28px}
+.review-card .stars{color:var(--pink);letter-spacing:.12em;font-size:1.05rem}
+.review-card blockquote{margin:12px 0 16px;font-size:1.05rem;line-height:1.65}
+.review-by{margin:0;font-weight:600}
+.review-by small{display:block;font-weight:400;color:#6b6270;margin-top:2px}
+.review-actions{margin-top:32px}
+.form-status:empty{display:none}
+.form-msg.is-ok{background:#E7F6EE;color:#146C43}
