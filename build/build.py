@@ -277,7 +277,7 @@ def build_home():
     dots = "".join(f'<button class="dot" aria-label="Show review {i+1}"></button>' for i in range(len(TESTIMONIALS)))
     # Rotating hero background, same six images and order as the legacy Duda slideshow
     hero_imgs = ["hero-procedures-collage", "plastic-surgery-hero-consultation",
-                 "dr-alan-tran-practice-hero", "plastic-surgery-hero-patient",
+                 "dr-alan-tran-practice-hero-20261012", "plastic-surgery-hero-patient",
                  "plastic-surgery-hero-natural-results", "orange-county-plastic-surgery-hero"]
     hero_slides = "".join(
         f'<div class="hero-slide is-active" style="background-image:url(\'{img_url(n)}\')"></div>' if i == 0
