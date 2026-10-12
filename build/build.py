@@ -99,7 +99,6 @@ def footer():
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div class="footer-nav">
-      <p class="f-title">Navigation</p>
       <ul class="f-links">
         <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/services/">Services</a></li>
         <li><a href="/gallery/">Gallery</a></li><li><a href="/testimonials/">Testimonials</a></li><li><a href="/specials/">Specials</a></li><li><a href="/contact/">Contact</a></li>
