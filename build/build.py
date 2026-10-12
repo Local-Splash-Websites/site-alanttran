@@ -116,7 +116,7 @@ def footer():
       <p class="f-title">Office Info</p>
       <address>{e(site['address_line'])}<br>{e(site['city'])}, {e(site['state'])} {e(site['zip'])}<br>
       <a href="tel:{site['phone_e164']}">{e(site['phone'])}</a><br><a href="mailto:{e(site['email'])}">{e(site['email'])}</a></address>
-      <p class="footer-hours"><strong>Mon-Fri:</strong> 9:00 AM-5:00 PM</p>
+      <p class="footer-hours"><strong>Mon-Fri:</strong> 10:00 AM-6:00 PM</p>
       <div class="social">{social}</div>
     </div>
   </div>
