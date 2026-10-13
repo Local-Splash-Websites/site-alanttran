@@ -22,11 +22,14 @@ if "--domain" in sys.argv:
 domain = domain or "alantran-plastic-surgery.com"
 BASE = f"https://{domain}"
 YEAR = datetime.date.today().year
+IMAGE_VERSIONS = {"dr-alan-tran-practice-hero": "20261013"}
 
 e = lambda s: html.escape(s or "", quote=True)
 
 def img_url(name):
-    return f"/assets/img/{name}.webp"
+    url = f"/assets/img/{name}.webp"
+    version = IMAGE_VERSIONS.get(name)
+    return f"{url}?v={version}" if version else url
 
 SERVICES = {}
 for slug, p in pages.items():
@@ -277,7 +280,7 @@ def build_home():
     dots = "".join(f'<button class="dot" aria-label="Show review {i+1}"></button>' for i in range(len(TESTIMONIALS)))
     # Rotating hero background, same six images and order as the legacy Duda slideshow
     hero_imgs = ["hero-procedures-collage", "plastic-surgery-hero-consultation",
-                 "dr-alan-tran-practice-hero-20261013", "plastic-surgery-hero-patient",
+                 "dr-alan-tran-practice-hero", "plastic-surgery-hero-patient",
                  "plastic-surgery-hero-natural-results", "orange-county-plastic-surgery-hero"]
     hero_slides = "".join(
         f'<div class="hero-slide is-active" style="background-image:url(\'{img_url(n)}\')"></div>' if i == 0
