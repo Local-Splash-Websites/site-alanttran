@@ -483,11 +483,14 @@ def build_testimonials():
 def build_specials():
     body = page_hero("Specials", "Current offers from our office", None) + f"""
 <section class="svc-sec"><div class="wrap prose prose-narrow center">
-  <h2>Ask us about this month’s specials</h2>
-  <p>We periodically offer savings on injectables, skin treatments and select procedures. Specials change often, so please call the office or send us a message and we’ll let you know what’s available right now.</p>
+  <p class="eyebrow center">Current Special</p>
+  <h2>Xeomin® for $10 per unit</h2>
+  <p>Smooth forehead lines, crow’s feet and frown lines with Xeomin at $10 per unit (regular price $12.50 a unit). Call the office to book your appointment or ask any questions.</p>
+  <figure class="special-flyer"><a href="/assets/img/specials-xeomin-flyer.webp" target="_blank" rel="noopener"><img src="/assets/img/specials-xeomin-flyer.webp" alt="Xeomin special: $10 per unit, regular price $12.50 a unit. Reduces forehead lines, softens crow’s feet and smooths frown lines. Call 714-966-2888, 17931 Euclid Street, Fountain Valley, CA 92708." width="1024" height="1536" loading="lazy"></a></figure>
   <div class="ready-actions center"><a class="btn btn-pink" href="tel:{site['phone_e164']}">Call {e(site['phone'])}</a><a class="btn btn-outline" href="/contact/">Send a Message</a></div>
+  <p class="special-note">We also periodically offer savings on other injectables, skin treatments and select procedures. Call or send us a message to hear what’s available right now.</p>
 </div></section>"""
-    page("/specials/", "Specials", "Ask about current specials at the office of Dr. Alan T. Tran in Fountain Valley.", body, "specials")
+    page("/specials/", "Specials", "Xeomin special at $10 per unit and other current offers from the office of Dr. Alan T. Tran in Fountain Valley.", body, "specials")
 
 def contact_form(svc_options):
     return f"""

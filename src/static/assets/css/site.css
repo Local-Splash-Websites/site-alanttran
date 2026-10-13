@@ -394,3 +394,6 @@ p{margin:0 0 1em}
 .review-actions{margin-top:32px}
 .form-status:empty{display:none}
 .form-msg.is-ok{background:#E7F6EE;color:#146C43}
+.special-flyer{max-width:560px;margin:28px auto 0}
+.special-flyer img{display:block;width:100%;height:auto;border-radius:14px;box-shadow:0 12px 36px rgba(0,0,0,.14)}
+.special-note{margin-top:28px}
