@@ -1,28 +1,19 @@
 # Alan T. Tran, M.D. — Plastic Surgery website
 
-A responsive static-site build for Alan T. Tran, M.D. The repository is configured for container deployment through Coolify using Docker Compose.
-
-## Deploy with Coolify
-
-Connect this repository in Coolify, select the Docker Compose build pack, use the repository root as the base directory, and select `/docker-compose.yml`. Configure the application variables listed in [`.env.example`](.env.example) in Coolify; no `.env` file is required. See [DEPLOYMENT.md](DEPLOYMENT.md) for image, domain, and mail configuration details.
-
-Coolify handles public routing and HTTPS. The container listens on HTTP port 80. Set `SITE_DOMAIN` to the canonical hostname used in generated metadata; configure all routable hostnames separately in Coolify.
+A responsive static website for Alan T. Tran, M.D.
 
 ## Updating site content
 
-Edit the JSON files under `content/`, then commit and deploy the change through Coolify. The Docker build generates the site and fetches/optimizes any missing images from the source URLs in `assets/manifest.tsv`.
+Edit the JSON files under `content/`, then commit the change. The site generator builds the pages and retrieves/optimizes missing images from the source URLs in `assets/manifest.tsv`.
 
 ## Repository layout
 
 - `content/`: site and page content.
 - `build/build.py`: generates the static pages.
-- `build/fetch_assets.py`: retrieves and optimizes missing source images during the image build.
+- `build/fetch_assets.py`: retrieves and optimizes missing source images.
 - `src/static/`: CSS, JavaScript, and shared static-site templates.
 - `assets/manifest.tsv`: source image manifest.
-- `public/`: generated site files included in the image.
-- `docker/entrypoint.sh`: applies runtime domain configuration.
-- `Dockerfile`, `docker-compose.yml`: container build and Coolify service configuration.
-- `.env.example`: variable-name checklist for entering values in Coolify; it contains no deployment secrets.
+- `public/`: generated site files.
 
 ## Pages
 
