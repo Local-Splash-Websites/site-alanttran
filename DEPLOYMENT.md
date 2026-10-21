@@ -13,4 +13,4 @@ IMAGE_NAME and IMAGE_TAG must be set to a valid image reference for building/pub
 
 Configure routing separately in Coolify's Domains setting: keep the LocalSplash hostname available and add the client's hostname only when confirmed. Route the service to its internal HTTP port 80; Coolify/reverse proxy manages external HTTPS and DNS. The SITE_DOMAIN value controls canonical metadata and is not a substitute for the Domains setting.
 
-.env.example is a variable-name checklist only; Coolify does not need or load an .env file. The legacy bare-metal Apache scripts and their variables are separate and are not used by this Compose deployment.
+.env.example is a variable-name checklist only; Coolify does not need or load an .env file. The Compose deployment is the supported deployment path for this repository.

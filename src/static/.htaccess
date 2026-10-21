@@ -1,4 +1,4 @@
-# Works with the vhost from scripts/setup-server.sh (AllowOverride All).
+# Apache directory rules for the container virtual host (AllowOverride All).
 Options -Indexes -MultiViews
 DirectoryIndex index.html index.php
 ErrorDocument 404 /404.html

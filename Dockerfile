@@ -6,8 +6,8 @@ COPY build/ build/
 COPY src/ src/
 COPY public/ public/
 COPY assets/manifest.tsv assets/manifest.tsv
-COPY scripts/fetch-assets.py scripts/fetch-assets.py
-RUN python build/build.py && python scripts/fetch-assets.py
+COPY build/fetch_assets.py build/fetch_assets.py
+RUN python build/build.py && python build/fetch_assets.py
 
 FROM php:8.3-apache
 RUN apt-get update && apt-get install -y --no-install-recommends msmtp ca-certificates curl \
