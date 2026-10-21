@@ -1,7 +1,20 @@
 services:
   web:
-    build: .
-    ports:
-      - "8090:80"
-    env_file: .env
+    image: ${IMAGE_NAME:-}:${IMAGE_TAG:-}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:-}
+      SITE_NAME: ${SITE_NAME:-}
+      CONTACT_TO_EMAIL: ${CONTACT_TO_EMAIL:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-}
+      SMTP_USER: ${SMTP_USER:-}
+      SMTP_PASS: ${SMTP_PASS:-}
+      SMTP_TLS: ${SMTP_TLS:-}
+      SMTP_STARTTLS: ${SMTP_STARTTLS:-}
+    expose:
+      - "80"
     restart: unless-stopped

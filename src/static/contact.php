@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: /contact/', true,
 
 $to   = env('CONTACT_TO_EMAIL');
 $from = env('MAIL_FROM');
-$site = env('SITE_NAME', 'Alan T. Tran, M.D. website');
+$site = env('SITE_NAME');
 if ($to === '' || $from === '') { error_log('contact.php: CONTACT_TO_EMAIL / MAIL_FROM not configured'); back('config'); }
 
 // Spam checks: honeypot + minimum fill time

@@ -4,10 +4,9 @@
 Reads content/site.json + content/pages.json and writes a complete site to public/.
 No third-party packages needed (Python 3.8+).
 
-Usage:  python3 build/build.py [--domain example.com]
-        (SITE_DOMAIN in the environment also works)
+The generated metadata contains runtime placeholders substituted by docker/entrypoint.sh.
 """
-import html, json, os, re, shutil, sys, datetime
+import html, json, re, shutil, datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -16,11 +15,8 @@ SRC = ROOT / "src"
 site = json.loads((ROOT / "content/site.json").read_text())
 pages = json.loads((ROOT / "content/pages.json").read_text())
 
-domain = os.environ.get("SITE_DOMAIN", "")
-if "--domain" in sys.argv:
-    domain = sys.argv[sys.argv.index("--domain") + 1]
-domain = domain or "alantran-plastic-surgery.com"
-BASE = f"https://{domain}"
+domain = "{{SITE_DOMAIN}}"
+BASE = "{{SITE_BASE_URL}}"
 YEAR = datetime.date.today().year
 IMAGE_VERSIONS = {"dr-alan-tran-practice-hero": "20261013"}
 
@@ -535,7 +531,7 @@ def build_thanks():
 
 def build_privacy():
     blocks = pages["privacy-policy"]["blocks"]
-    inner = render_blocks([dict(b, x=b["x"].replace("{{SITE_DOMAIN}}", domain)) if "x" in b else b for b in blocks])
+    inner = render_blocks(blocks)
     body = page_hero("Privacy Policy", "", None) + f'<section class="svc-sec"><div class="wrap prose prose-narrow">{inner}</div></section>'
     page("/privacy-policy/", "Privacy Policy", "Privacy policy for the website of Alan T. Tran, M.D., Inc.", body)
 

@@ -24,7 +24,7 @@ git pull && sudo ./scripts/deploy.sh
 ```
 
 Local preview: `./scripts/preview.sh` then open http://localhost:8080.
-Docker alternative: `python3 build/build.py && python3 scripts/fetch-assets.py && docker compose up -d --build` (port 8080).
+Docker deployment: see [DEPLOYMENT.md](DEPLOYMENT.md).
 
 ## Environment variables (`.env`)
 
