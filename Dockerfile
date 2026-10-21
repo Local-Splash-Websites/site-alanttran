@@ -7,8 +7,6 @@ COPY src/ src/
 COPY public/ public/
 COPY assets/manifest.tsv assets/manifest.tsv
 COPY scripts/fetch-assets.py scripts/fetch-assets.py
-ARG SITE_DOMAIN=alantran-plastic-surgery.com
-ENV SITE_DOMAIN=$SITE_DOMAIN
 RUN python build/build.py && python scripts/fetch-assets.py
 
 FROM php:8.3-apache

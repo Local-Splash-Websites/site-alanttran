@@ -1,23 +1,16 @@
-# Container deployment
+# Coolify deployment
 
-Use the single docker-compose.yml for Coolify build/publish and image deployment. It has no env_file dependency; per-site values are Compose variables with safe defaults. Coolify Environment Variables are the source of truth for overrides. .env.example is a field-name guide, not a file to upload or commit with credentials.
+Select this repository and branch, choose the Docker Compose build pack, base directory /, and Compose file /docker-compose.yml. Set all variables below in the Coolify application's Environment Variables before deploying. Unset Compose variables resolve to empty strings. Configure values used by the contact form and mail relay in Coolify before relying on those features.
 
-## Coolify configuration
+Variables to configure in Coolify:
 
-Select the repository/branch, Docker Compose build pack, base directory /, and Compose file /docker-compose.yml. Configure registry credentials in Coolify, then deploy to build and publish localsplash-websites/site-alanttran:latest.
+IMAGE_NAME and IMAGE_TAG must be set to a valid image reference for building/publishing. Other unset variables resolve to empty strings.
 
-In the application's Environment Variables section, add SITE_DOMAIN, SITE_NAME, CONTACT_TO_EMAIL, MAIL_FROM, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_TLS, and SMTP_STARTTLS. Mark SMTP_PASS as a secret. Defaults match the current site. Configure alanttran.site.localsplash.ai under Coolify Domains; add a client hostname only when confirmed, retaining the LocalSplash hostname. DNS and TLS are managed through Coolify/reverse proxy and DNS. SITE_DOMAIN is the build-time canonical value, not a substitute for domain routing.
+- SITE_DOMAIN: hostname only, without scheme; applied at container startup to canonical/Open Graph URLs, sitemap, robots.txt, and the privacy-policy domain text. It does not configure routing.
+- SITE_NAME, CONTACT_TO_EMAIL, MAIL_FROM: contact-form display name, recipient, and sender.
+- SMTP_HOST, SMTP_PORT, SMTP_TLS, SMTP_STARTTLS: SMTP relay configuration.
+- SMTP_USER and SMTP_PASS: define both; set empty values when the relay does not require authentication. Mark SMTP_PASS as a secret.
 
-The contact form will not send mail until a valid SMTP relay is configured.
+Configure routing separately in Coolify's Domains setting: keep the LocalSplash hostname available and add the client's hostname only when confirmed. Route the service to its internal HTTP port 80; Coolify/reverse proxy manages external HTTPS and DNS. The SITE_DOMAIN value controls canonical metadata and is not a substitute for the Domains setting.
 
-## Deploy a published image
-
-Copy this Compose file to the deployment directory on lsweb01. The build section is unused by normal pull/up operations.
-
-    docker compose -f docker-compose.yml pull
-    docker compose -f docker-compose.yml up -d --remove-orphans
-    docker compose -f docker-compose.yml ps
-
-## Reusable pattern
-
-For sibling sites use repo site-<UN>, image localsplash-websites/site-<UN>, and hostname <UN>.site.localsplash.ai. Keep one Compose file per repo and supply unique site/contact/SMTP values through that site's Coolify variables. The legacy bare-metal Apache scripts still use the additional variables in the legacy section of .env.example; that workflow is separate from Coolify.
+.env.example is a variable-name checklist only; Coolify does not need or load an .env file. The legacy bare-metal Apache scripts and their variables are separate and are not used by this Compose deployment.

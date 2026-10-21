@@ -1,22 +1,20 @@
 services:
   web:
-    image: localsplash-websites/site-alanttran:latest
+    image: ${IMAGE_NAME:-}:${IMAGE_TAG:-}
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        SITE_DOMAIN: ${SITE_DOMAIN:-alanttran.site.localsplash.ai}
     environment:
-      SITE_DOMAIN: ${SITE_DOMAIN:-alanttran.site.localsplash.ai}
-      SITE_NAME: ${SITE_NAME:-Alan T. Tran, M.D.}
-      CONTACT_TO_EMAIL: ${CONTACT_TO_EMAIL:-office@alantranmd.com}
-      MAIL_FROM: ${MAIL_FROM:-website@localsplash.ai}
+      SITE_DOMAIN: ${SITE_DOMAIN:-}
+      SITE_NAME: ${SITE_NAME:-}
+      CONTACT_TO_EMAIL: ${CONTACT_TO_EMAIL:-}
+      MAIL_FROM: ${MAIL_FROM:-}
       SMTP_HOST: ${SMTP_HOST:-}
-      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_PORT: ${SMTP_PORT:-}
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASS: ${SMTP_PASS:-}
-      SMTP_TLS: ${SMTP_TLS:-on}
-      SMTP_STARTTLS: ${SMTP_STARTTLS:-on}
-    ports:
-      - "8090:80"
+      SMTP_TLS: ${SMTP_TLS:-}
+      SMTP_STARTTLS: ${SMTP_STARTTLS:-}
+    expose:
+      - "80"
     restart: unless-stopped
