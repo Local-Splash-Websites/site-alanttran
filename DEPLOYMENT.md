@@ -14,3 +14,9 @@ IMAGE_NAME and IMAGE_TAG must be set to a valid image reference for building/pub
 Configure routing separately in Coolify's Domains setting: keep the LocalSplash hostname available and add the client's hostname only when confirmed. Route the service to its internal HTTP port 80; Coolify/reverse proxy manages external HTTPS and DNS. The SITE_DOMAIN value controls canonical metadata and is not a substitute for the Domains setting.
 
 .env.example is a variable-name checklist only; Coolify does not need or load an .env file. The Compose deployment is the supported deployment path for this repository.
+
+## LocalSplash preview subdomains
+
+Any host matching *.site.localsplash.ai (for example, un.site.localsplash.ai) receives no-store/no-cache headers for browsers, proxies, and CDNs, plus X-Robots-Tag: noindex, nofollow, noarchive, nosnippet. Crawling remains allowed so search engines can see the noindex response header and remove previously indexed URLs. Other client domains keep the normal site caching and indexing behavior.
+
+These headers are applied by Apache based on the request host. They do not make preview sites private or password-protected; anyone who can reach the hostname can still visit it.

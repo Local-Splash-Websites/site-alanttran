@@ -57,16 +57,31 @@ RewriteRule ^skin-cancer-treatment/?$ /services/skin-cancer-treatments/ [L,R=301
 RewriteRule ^(arm-lift|body-contouring|body-implants|breast-augmentation|breast-lift|breast-lumpectomy|breast-reconstruction|breast-reduction|breast-revision|brow-lift|earlobe-repair|eyelid-surgery|face-lift|keloid-scar-treatment|liposuction|neck-lift|rhinoplasty|skin-tightening|thigh-lift)/?$ /services/$1/ [L,R=301]
 </IfModule>
 
+<IfModule mod_setenvif.c>
+# LocalSplash preview hosts must never be cached or indexed.
+SetEnvIfNoCase Host "^.+\.site\.localsplash\.ai(?::[0-9]+)?$" localsplash_noindex
+</IfModule>
+
 <IfModule mod_headers.c>
 Header always set X-Content-Type-Options "nosniff"
 Header always set Referrer-Policy "strict-origin-when-cross-origin"
 Header always set X-Frame-Options "SAMEORIGIN"
 Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+# Keep preview subdomains out of browser, proxy, and CDN caches; permit crawling
+# so search engines can observe the X-Robots-Tag and remove any indexed URLs.
+Header always set Cache-Control "private, no-store, no-cache, must-revalidate, max-age=0" env=localsplash_noindex
+Header always set Surrogate-Control "no-store" env=localsplash_noindex
+Header always set CDN-Cache-Control "no-store" env=localsplash_noindex
+Header always set Pragma "no-cache" env=localsplash_noindex
+Header always set Expires "0" env=localsplash_noindex
+Header always set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet" env=localsplash_noindex
+
 <FilesMatch "\.(css|js|webp|svg|woff2?)$">
-  Header set Cache-Control "public, max-age=2592000"
+  Header set Cache-Control "public, max-age=2592000" env=!localsplash_noindex
 </FilesMatch>
 <FilesMatch "\.html$">
-  Header set Cache-Control "no-cache"
+  Header set Cache-Control "no-cache" env=!localsplash_noindex
 </FilesMatch>
 </IfModule>
 
