@@ -1,11 +1,11 @@
 <?php
 /**
  * Contact form handler.
- * Configuration comes from Apache SetEnv values (written by scripts/setup-server.sh from .env):
+ * Configuration comes from runtime environment variables passed to the container:
  *   CONTACT_TO_EMAIL  where messages are delivered (required)
  *   MAIL_FROM         envelope/From address, should be on your domain (required)
  *   SITE_NAME         used in the subject line (optional)
- * Mail is sent with PHP mail(), which setup-server.sh points at msmtp (your SMTP provider).
+ * Mail is sent with PHP mail(), which the container configures to use msmtp and your SMTP relay.
  */
 declare(strict_types=1);
 

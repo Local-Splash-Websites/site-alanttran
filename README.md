@@ -1,77 +1,28 @@
 # Alan T. Tran, M.D. — Plastic Surgery website
 
-A clean, single-version (responsive) rebuild of the old Duda site `mysite.localsplash.com/site/20e7336c`,
-ready to run on your own Apache server: fast static HTML plus one small PHP script for the contact form.
+A responsive static-site build for Alan T. Tran, M.D. The repository is configured for container deployment through Coolify using Docker Compose.
 
-## Quick start (fresh Ubuntu 22.04/24.04 or Debian 12/13 server)
+## Deploy with Coolify
 
-```bash
-git clone https://github.com/localsplash/site-dralantran.org.git
-cd site-dralantran.org
-cp .env.example .env
-nano .env                         # fill in the values below
-sudo ./scripts/setup-server.sh    # installs + configures everything; safe to re-run
-```
+Connect this repository in Coolify, select the Docker Compose build pack, use the repository root as the base directory, and select `/docker-compose.yml`. Configure the application variables listed in [`.env.example`](.env.example) in Coolify; no `.env` file is required. See [DEPLOYMENT.md](DEPLOYMENT.md) for image, domain, and mail configuration details.
 
-Point DNS (A records for the domain and `www`) at the server first so the free Let's Encrypt
-HTTPS certificate can be issued. If DNS isn't ready, the site still comes up on plain http;
-re-run the script later to add HTTPS.
+Coolify handles public routing and HTTPS. The container listens on HTTP port 80. Set `SITE_DOMAIN` to the canonical hostname used in generated metadata; configure all routable hostnames separately in Coolify.
 
-After editing content:
+## Updating site content
 
-```bash
-git pull && sudo ./scripts/deploy.sh
-```
+Edit the JSON files under `content/`, then commit and deploy the change through Coolify. The Docker build generates the site and fetches/optimizes any missing images from the source URLs in `assets/manifest.tsv`.
 
-Local preview: `./scripts/preview.sh` then open http://localhost:8080.
-Docker deployment: see [DEPLOYMENT.md](DEPLOYMENT.md).
+## Repository layout
 
-## Environment variables (`.env`)
-
-| Variable | Required | What it does |
-|---|---|---|
-| `SITE_DOMAIN` | yes | Main domain, e.g. `alantran-plastic-surgery.com`. Used for the vhost, canonical URLs, sitemap and certificate. |
-| `SITE_ALIASES` | no | Extra hostnames, space-separated (usually `www.<domain>`). |
-| `ADMIN_EMAIL` | yes | Apache ServerAdmin and Let's Encrypt expiry notices. |
-| `DOCROOT` | no | Where the site is published. Default `/var/www/<SITE_DOMAIN>`. |
-| `ENABLE_HTTPS` | no | `true` (default) gets a Let's Encrypt certificate and redirects http to https. |
-| `SITE_NAME` | no | Name used on contact-form emails. Default `Alan T. Tran, M.D.` |
-| `CONTACT_TO_EMAIL` | yes | Inbox that receives contact-form submissions. |
-| `MAIL_FROM` | yes | From address for those emails; must be allowed by your SMTP provider (SPF/DKIM). |
-| `SMTP_HOST` | yes* | SMTP relay (Google Workspace, Microsoft 365, SendGrid, Mailgun, SES, Postmark…). |
-| `SMTP_PORT` | no | Default `587`. |
-| `SMTP_USER` / `SMTP_PASS` | usually | SMTP login (an app password or API key). |
-| `SMTP_TLS` / `SMTP_STARTTLS` | no | `on`/`on` for port 587; `on`/`off` for port 465. |
-
-\*Without SMTP the site works but the contact form can't send. Mail goes out through `msmtp`;
-problems are logged to `/var/log/msmtp.log`.
-
-## What `setup-server.sh` does
-
-1. Installs Apache, PHP, msmtp, certbot, Python 3 + Pillow and rsync.
-2. Enables `rewrite`, `headers`, `expires`, `deflate` and `ssl`.
-3. Writes `/etc/msmtprc` from your SMTP settings and points PHP's `mail()` at it.
-4. Writes the Apache virtual host (contact-form settings passed as `SetEnv`) and disables the default site.
-5. Builds the site (the optimized WebP images are already in the repo) and publishes it to `DOCROOT`.
-6. Opens the firewall if `ufw` is active and gets an HTTPS certificate with certbot.
-
-## Repo layout
-
-```
-content/site.json         Practice details: name, tagline, address, phone, hours, links, footer text
-content/pages.json        Every service page, About, Gallery, Privacy Policy (cleaned-up copy)
-build/build.py            Generates public/ from the content (Python 3, no dependencies)
-src/static/               CSS, JS, contact.php, .htaccess, favicon (copied into public/)
-assets/manifest.tsv       Image list (local name -> original CDN URL)
-scripts/fetch-assets.py   Re-downloads any missing image from the old CDN as optimized WebP (all are already committed)
-scripts/setup-server.sh   One-shot server provisioning
-scripts/deploy.sh         Rebuild + publish
-scripts/preview.sh        Local preview
-Dockerfile, docker-compose.yml, docker/   Optional container setup
-public/                   Built site (committed for reference; regenerated on every deploy)
-```
-
-To change text, edit `content/*.json` and run `sudo ./scripts/deploy.sh`.
+- `content/`: site and page content.
+- `build/build.py`: generates the static pages.
+- `build/fetch_assets.py`: retrieves and optimizes missing source images during the image build.
+- `src/static/`: CSS, JavaScript, and shared static-site templates.
+- `assets/manifest.tsv`: source image manifest.
+- `public/`: generated site files included in the image.
+- `docker/entrypoint.sh`: applies runtime domain configuration.
+- `Dockerfile`, `docker-compose.yml`: container build and Coolify service configuration.
+- `.env.example`: variable-name checklist for entering values in Coolify; it contains no deployment secrets.
 
 ## Pages
 
