@@ -1,41 +1,23 @@
 # Container deployment
 
-Repo naming follows `site-<UN>`: this is `site-alanttran`; its image is `localsplash/site-alanttran`.
+Use the single docker-compose.yml for Coolify build/publish and image deployment. It has no env_file dependency; per-site values are Compose variables with safe defaults. Coolify Environment Variables are the source of truth for overrides. .env.example is a field-name guide, not a file to upload or commit with credentials.
 
-## Hostnames
+## Coolify configuration
 
-Both URLs route to the same deployed container:
-- Standard LocalSplash URL: `alanttran.site.localsplash.ai`
-- Manual/custom URL: add the chosen hostname in Coolify or the reverse proxy.
+Select the repository/branch, Docker Compose build pack, base directory /, and Compose file /docker-compose.yml. Configure registry credentials in Coolify, then deploy to build and publish localsplash-websites/site-alanttran:latest.
 
-The existing canonical hostname remains alantran-plastic-surgery.com by default; the standard URL is an additional routed hostname. Set build argument `SITE_DOMAIN` to the custom hostname if it should be canonical. DNS and proxy/TLS settings control routing; no site content edits are needed.
+In the application's Environment Variables section, add SITE_DOMAIN, SITE_NAME, CONTACT_TO_EMAIL, MAIL_FROM, SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_TLS, and SMTP_STARTTLS. Mark SMTP_PASS as a secret. Defaults match the current site. Configure alanttran.site.localsplash.ai under Coolify Domains; add a client hostname only when confirmed, retaining the LocalSplash hostname. DNS and TLS are managed through Coolify/reverse proxy and DNS. SITE_DOMAIN is the build-time canonical value, not a substitute for domain routing.
 
-## Build and publish
+The contact form will not send mail until a valid SMTP relay is configured.
 
-On the build host, authenticate to Docker Hub using a protected host/Coolify credential, then:
+## Deploy a published image
 
-```sh
-IMAGE_TAG=test
-SITE_DOMAIN=alantran-plastic-surgery.com docker compose build web
-docker compose push web
-```
+Copy this Compose file to the deployment directory on lsweb01. The build section is unused by normal pull/up operations.
 
-The multi-stage build generates the site and optimizes missing image assets; only generated public files enter the PHP/Apache runtime. The image health check requests the homepage.
+    docker compose -f docker-compose.yml pull
+    docker compose -f docker-compose.yml up -d --remove-orphans
+    docker compose -f docker-compose.yml ps
 
-## Deploy to lsweb01
+## Reusable pattern
 
-Place `docker-compose.deploy.yml` and a protected runtime `.env` on lsweb01. Set `IMAGE_TAG`, `HOST_PORT`, and contact-form/SMTP runtime values there; never commit credentials.
-
-```sh
-docker compose -f docker-compose.deploy.yml pull
-docker compose -f docker-compose.deploy.yml up -d --remove-orphans
-docker compose -f docker-compose.deploy.yml ps
-```
-
-This is image-only: lsweb01 does not build source. Configure the proxy to forward both hostnames to this service on port 80 and terminate TLS.
-
-## Coolify and reusable pattern
-
-In Coolify, select this repo/branch, Build Pack `Docker Compose`, base directory `/`, compose file `/docker-compose.yaml`; publish image `localsplash/site-alanttran:<tag>` and have lsweb01 pull that exact tag using the image-only compose. Store registry and runtime credentials in protected settings.
-
-For sibling websites use repo `site-<UN>`, image `localsplash/site-<UN>`, and standard URL `<UN>.site.localsplash.ai`. Each can also have a manual/custom hostname mapped to the same deployment. Keep per-site values in deployment config rather than site content.
+For sibling sites use repo site-<UN>, image localsplash-websites/site-<UN>, and hostname <UN>.site.localsplash.ai. Keep one Compose file per repo and supply unique site/contact/SMTP values through that site's Coolify variables. The legacy bare-metal Apache scripts still use the additional variables in the legacy section of .env.example; that workflow is separate from Coolify.
