@@ -221,6 +221,8 @@ p{margin:0 0 1em}
 .closing{padding:50px 0;text-align:center}
 .closing h3{font-family:var(--display);font-style:italic;font-weight:400;color:var(--pink);font-size:1.6rem;margin:0}
 .related{padding:0 0 60px;text-align:center}
+.svc-sec.alt-bg + .related{padding-top:32px}
+.svc-sec.about-who{padding-bottom:40px}
 .pill-list{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .pill-list a{display:inline-block;padding:8px 18px;border:1px solid var(--line);border-radius:30px;text-decoration:none;color:var(--ink);font-size:.92rem}
 .pill-list a:hover{border-color:var(--pink);color:var(--pink)}
