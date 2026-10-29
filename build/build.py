@@ -54,7 +54,7 @@ def nav(active):
 <nav class="main-nav" id="main-nav" aria-label="Main">
   <ul class="nav-list">
     <li>{a('/', 'Home', 'home')}</li>
-    <li class="has-sub">{a('/about/', 'About', 'about')}<button class="sub-toggle" aria-label="Show About menu" aria-expanded="false"></button>
+    <li class="has-sub">{a('/about/', 'Why Us', 'about')}<button class="sub-toggle" aria-label="Show Why Us menu" aria-expanded="false"></button>
       <ul class="sub">
         <li><a href="/tour-the-office/">Tour the Office</a></li>
         <li><a href="/meet-the-doctor/">Meet the Doctor</a></li>
@@ -99,7 +99,7 @@ def footer():
   <div class="wrap footer-grid">
     <div class="footer-nav">
       <ul class="f-links">
-        <li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/services/">Services</a></li>
+        <li><a href="/">Home</a></li><li><a href="/about/">Why Us</a></li><li><a href="/services/">Services</a></li>
         <li><a href="/gallery/">Gallery</a></li><li><a href="/testimonials/">Testimonials</a></li><li><a href="/specials/">Specials</a></li><li><a href="/contact/">Contact</a></li>
       </ul>
     </div>
@@ -378,21 +378,32 @@ def build_home():
         "telephone": s["phone"], "email": s["email"], "medicalSpecialty": "PlasticSurgery",
         "address": {"@type": "PostalAddress", "streetAddress": s["address_line"], "addressLocality": s["city"], "addressRegion": s["state"], "postalCode": s["zip"], "addressCountry": "US"},
         "openingHours": "Mo-Fr 10:00-18:00", "foundingDate": s["established"], "image": BASE + img_url("dr-alan-tran-office-portrait")})}</script>"""
-    page("/", "Alan T. Tran, M.D. | Plastic Surgery in Fountain Valley, Orange County",
-         "Board-certified plastic and reconstructive surgeon Dr. Alan T. Tran has served Orange County since 2000. Breast, body, skin and facial procedures in Fountain Valley, CA.",
+    page("/", "Alan T. Tran, M.D. | Plastic Surgery in Orange County",
+         "Board-certified plastic and reconstructive surgeon Dr. Alan T. Tran has served Orange County since 2000. Breast, body, skin and facial procedures for patients throughout Orange County, CA.",
          body, "home", jsonld=jsonld)
+
+WHY_US_PAGES = [("/about/", "About Dr. Tran"), ("/meet-the-doctor/", "Meet the Doctor"), ("/tour-the-office/", "Tour the Office")]
+
+def why_us_related(current):
+    """Cross-links between the pages in the Why Us menu (siblings of `current`), plus procedures."""
+    items = "".join(f'<li><a href="{h}">{e(n)}</a></li>' for h, n in WHY_US_PAGES if h != current)
+    return f'<section class="related"><div class="wrap"><ul class="pill-list">{items}<li><a href="/services/">Our Procedures</a></li></ul></div></section>'
+
+def rich(text):
+    """Escape text, then allow [label](/path/) links that point at site pages."""
+    return re.sub(r"\[([^\]]+)\]\((/[^)\s]*)\)", r'<a href="\2">\1</a>', e(text))
 
 # ---------------------------------------------------------------- other pages
 def build_about():
     a = pages["about"]
-    who = "".join(f"<p>{e(x)}</p>" for x in a["who"])
+    who = "".join(f"<p>{rich(x)}</p>" for x in a["who"])
     body = page_hero("About Dr. Alan Tran", site["tagline"], "dr-alan-tran-practice-hero", "About") + f"""
 <section class="svc-sec"><div class="wrap svc-split img-right">
   <div class="prose"><p class="eyebrow">Welcome to our clinic</p><h2>Helping you achieve your best natural look</h2><p class="quote">{e(a['welcome'])}</p><p class="sig">- Dr. Alan Tran</p></div>
   <figure><img src="{img_url('dr-alan-tran-office-portrait')}" alt="Dr. Alan T. Tran" loading="lazy"></figure>
 </div></section>
-<section class="svc-sec alt-bg"><div class="wrap prose prose-narrow"><h2>Who we are</h2>{who}</div></section>
-<section class="related"><div class="wrap"><ul class="pill-list"><li><a href="/meet-the-doctor/">Meet the Doctor</a></li><li><a href="/tour-the-office/">Tour the Office</a></li><li><a href="/services/">Our Procedures</a></li></ul></div></section>
+<section class="svc-sec alt-bg about-who"><div class="wrap prose prose-narrow"><h2>Who we are</h2>{who}</div></section>
+{why_us_related("/about/")}
 {cta_band()}"""
     page("/about/", "About Dr. Alan Tran", "Dr. Alan T. Tran is a board-certified plastic and reconstructive surgeon practicing in Orange County since 2000.", body, "about")
 
@@ -410,6 +421,7 @@ def build_meet():
   </div>
   <figure><img src="{img_url('dr-alan-tran-portrait')}" alt="Dr. Alan T. Tran" loading="lazy"></figure>
 </div></section>
+{why_us_related("/meet-the-doctor/")}
 {cta_band()}"""
     page("/meet-the-doctor/", "Meet Dr. Alan T. Tran", "Meet Dr. Alan T. Tran, a third-generation physician board certified in Plastic Surgery and General Surgery.", body, "about")
 
@@ -422,6 +434,7 @@ def build_tour():
   <div class="tour-grid">{figs}</div>
 </div></section>
 <section class="svc-sec alt-bg"><div class="wrap"><div class="map-wrap"><iframe title="Map to our office" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q={e(site['map_query']).replace(' ', '+')}&amp;output=embed"></iframe></div></div></section>
+{why_us_related("/tour-the-office/")}
 {ready_band()}"""
     page("/tour-the-office/", "Tour the Office", "Visit Dr. Alan T. Tran's plastic surgery office at 17931 Euclid St, Fountain Valley, CA.", body, "about")
 
