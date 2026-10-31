@@ -82,7 +82,7 @@
       };
       button.disabled = true;
       show(true, 'Sending…');
-      fetch('/lead-webhook', {
+      fetch('/v1/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(payload)
