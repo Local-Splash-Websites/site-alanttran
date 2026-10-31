@@ -503,7 +503,7 @@ def build_specials():
 
 def contact_form(svc_options):
     return f"""
-<form class="contact-form" action="/lead-webhook" method="post" data-lead-form novalidate>
+<form class="contact-form" action="/v1/lead" method="post" data-lead-form novalidate>
   <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
   <div class="form-status" role="status" aria-live="polite"></div>
   <div class="row2">
