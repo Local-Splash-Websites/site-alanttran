@@ -49,4 +49,4 @@ Home, About, Meet the Doctor, Tour the Office, Services (index plus 25 procedure
 
 ## Leads
 
-The contact form posts Duda-style JSON to `/v1/lead` on the site's own domain. Apache proxies it (and the old `/lead-webhook` paths) to the shared [website-lead-submit](https://github.com/localsplash/website-lead-submit) service at `$LEADS_SERVICE_URL/v1/lead/20e7336c`, which validates the form and forwards it to the RelevantAds Duda webhook. Set `LEADS_SERVICE_URL` (for example `http://website-lead-submit:8080` on the Coolify network). There is no PHP lead code in this repo anymore.
+The contact form posts Duda-style JSON to `/v1/lead` on the site's own domain. Apache proxies it (and the old `/lead-webhook` paths) to the shared [website-lead-submit](https://github.com/localsplash/website-lead-submit) service at `$LEADS_SERVICE_URL/v1/lead`, which validates the form and forwards it to the RelevantAds Duda webhook. Set `LEADS_SERVICE_URL` (for example `http://website-lead-submit:8080` on the Coolify network). There is no PHP lead code in this repo anymore.

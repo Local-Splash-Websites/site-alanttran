@@ -11,7 +11,7 @@ RewriteEngine On
 
 # Leads: proxy to the shared website-lead-submit service (github.com/localsplash/website-lead-submit),
 # keyed by Duda site_name 20e7336c. Old /lead-webhook paths are kept for cached pages.
-RewriteRule ^(v1/lead|lead-webhook(\.php)?)/?$ %{ENV:LEADS_SERVICE_URL}/v1/lead/20e7336c [P,L]
+RewriteRule ^(v1/lead|lead-webhook(\.php)?)/?$ %{ENV:LEADS_SERVICE_URL}/v1/lead [P,L]
 
 # Add trailing slash to directory-style URLs
 RewriteCond %{REQUEST_FILENAME} !-f
