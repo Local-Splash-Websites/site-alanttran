@@ -100,9 +100,10 @@ p{margin:0 0 1em}
 .hero-slide.is-active{opacity:1}
 .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(30,22,30,.72) 0%,rgba(30,22,30,.45) 55%,rgba(30,22,30,.15) 100%)}
 .hero-inner{position:relative;z-index:2;padding-top:80px;padding-bottom:80px;width:100%}
-.hero-tag{display:inline-block;font-weight:700;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);background:rgba(255,255,255,.94);padding:7px 14px;border-radius:2px;margin-bottom:22px}
-.hero h1{font-family:var(--serif);font-style:italic;font-weight:400;color:#fff;font-size:clamp(2.4rem,6vw,4.4rem);text-transform:none;letter-spacing:0;max-width:16ch;margin-bottom:.4em}
-.hero h1 em{font-style:italic}
+.hero-tag{display:inline-block;font-family:inherit;line-height:1.4;font-style:normal;font-weight:700;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--pink);background:rgba(255,255,255,.94);padding:7px 14px;border-radius:2px;margin-bottom:22px}
+.hero .hero-title{font-family:var(--serif);line-height:1.2;font-style:italic;font-weight:400;color:#fff;font-size:clamp(2.4rem,6vw,4.4rem);text-transform:none;letter-spacing:0;max-width:16ch;margin-bottom:.4em}
+.hero .hero-title em{font-style:italic}
+.hero-slide--first{background-image:url('/assets/img/hero-procedures-collage.webp')}
 .lede{font-size:1.08rem;max-width:560px;color:rgba(255,255,255,.92)}
 .lede-dark{color:var(--gray);max-width:720px;margin:0 auto 2.5em}
 .hero-actions,.ready-actions,.band-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
@@ -158,7 +159,7 @@ p{margin:0 0 1em}
 .points{list-style:none;padding:0;margin:26px 0 0}
 .points li{display:flex;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}
 .pnum{font-family:var(--display);font-style:italic;color:var(--pink);font-size:1.8rem;line-height:1;min-width:44px}
-.points h4{margin:0 0 4px;font-family:var(--display);font-weight:600}
+.points h3{margin:0 0 4px;font-family:var(--display);font-weight:600;font-size:1.15rem}
 .points p{margin:0;color:var(--gray);font-size:.95rem}
 
 .testimonials{padding:90px 0}
@@ -454,3 +455,9 @@ p{margin:0 0 1em}
   .gallery-grid--breast-augmentation{grid-template-columns:minmax(0,340px)}
   .gallery-cats a{font-size:.9rem;padding:7px 12px}
 }
+
+/* Home: plastic surgery overview text */
+.intro-sec{padding:64px 0;background:#fff}
+.intro-sec .wrap{max-width:860px}
+.intro-sec h2{text-align:center}
+.intro-sec p{font-size:1.05rem;line-height:1.75}
