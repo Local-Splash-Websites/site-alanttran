@@ -3678,60 +3678,88 @@
  "gallery": {
   "kind": "gallery",
   "title": "Gallery",
-  "images": [
-   "breast-augmentation-before-after-01",
-   "breast-augmentation-before-after-02",
-   "breast-augmentation-before-after-03",
-   "breast-augmentation-before-after-04",
-   "breast-augmentation-before-after-05",
-   "breast-augmentation-before-after-06",
-   "breast-augmentation-before-after-07",
-   "breast-augmentation-before-after-08",
-   "breast-augmentation-before-after-09",
-   "breast-augmentation-before-after-10",
-   "breast-augmentation-before-after-11",
-   "breast-augmentation-before-after-12",
-   "breast-augmentation-before-after-13",
-   "breast-augmentation-before-after-14",
-   "breast-augmentation-before-after-15",
-   "breast-augmentation-before-after-16",
-   "breast-augmentation-before-after-17",
-   "breast-augmentation-before-after-18",
-   "breast-augmentation-before-after-19",
-   "breast-augmentation-before-after-20",
-   "breast-augmentation-before-after-21",
-   "breast-augmentation-before-after-22",
-   "breast-augmentation-before-after-23",
-   "breast-augmentation-before-after-24",
-   "breast-augmentation-before-after-25",
-   "breast-augmentation-before-after-26",
-   "breast-augmentation-before-after-27",
-   "breast-augmentation-before-after-28",
-   "upper-eyelid-surgery-before-after-01",
-   "upper-eyelid-surgery-before-after-02",
-   "upper-eyelid-surgery-before-after-03",
-   "upper-eyelid-surgery-before-after-04",
-   "upper-eyelid-surgery-before-after-05",
-   "upper-eyelid-surgery-before-after-06",
-   "dermal-fillers-before-after",
-   "nose-scar-revision-before-after-01",
-   "nose-scar-revision-before-after-02",
-   "ear-keloid-scar-revision-before-after",
-   "ear-keloid-removal-before-after",
-   "cleft-lip-palate-revision-before-after-01",
-   "cleft-lip-palate-revision-before-after-02",
-   "cleft-lip-palate-revision-before-after-03",
-   "cleft-lip-palate-revision-before-after-04",
-   "cleft-lip-palate-revision-before-after-05",
-   "cleft-lip-palate-revision-before-after-06"
-  ],
-  "categories": [
-   "Breast Augmentation",
-   "Upper Blepharoplasty",
-   "Fillers & Botox",
-   "Ear Keloid Removal",
-   "Scar Revision of Nose",
-   "Cleft Lip and Palate Revision"
+  "sections": [
+   {
+    "title": "Breast Augmentation",
+    "id": "breast-augmentation",
+    "images": [
+     "breast-augmentation-before-after-01",
+     "breast-augmentation-before-after-02",
+     "breast-augmentation-before-after-03",
+     "breast-augmentation-before-after-04",
+     "breast-augmentation-before-after-05",
+     "breast-augmentation-before-after-06",
+     "breast-augmentation-before-after-07",
+     "breast-augmentation-before-after-08",
+     "breast-augmentation-before-after-09",
+     "breast-augmentation-before-after-10",
+     "breast-augmentation-before-after-11",
+     "breast-augmentation-before-after-12",
+     "breast-augmentation-before-after-13",
+     "breast-augmentation-before-after-14",
+     "breast-augmentation-before-after-15",
+     "breast-augmentation-before-after-16",
+     "breast-augmentation-before-after-17",
+     "breast-augmentation-before-after-18",
+     "breast-augmentation-before-after-19",
+     "breast-augmentation-before-after-20",
+     "breast-augmentation-before-after-21",
+     "breast-augmentation-before-after-22",
+     "breast-augmentation-before-after-23",
+     "breast-augmentation-before-after-24",
+     "breast-augmentation-before-after-25",
+     "breast-augmentation-before-after-26",
+     "breast-augmentation-before-after-27",
+     "breast-augmentation-before-after-28"
+    ]
+   },
+   {
+    "title": "Upper Blepharoplasty",
+    "id": "upper-blepharoplasty",
+    "images": [
+     "upper-eyelid-surgery-before-after-01",
+     "upper-eyelid-surgery-before-after-02",
+     "upper-eyelid-surgery-before-after-03",
+     "upper-eyelid-surgery-before-after-04",
+     "upper-eyelid-surgery-before-after-05",
+     "upper-eyelid-surgery-before-after-06"
+    ]
+   },
+   {
+    "title": "Fillers & Botox",
+    "id": "fillers-botox",
+    "images": [
+     "dermal-fillers-before-after"
+    ]
+   },
+   {
+    "title": "Ear Keloid Removal",
+    "id": "ear-keloid-removal",
+    "images": [
+     "ear-keloid-scar-revision-before-after",
+     "ear-keloid-removal-before-after"
+    ]
+   },
+   {
+    "title": "Scar Revision of Nose",
+    "id": "nose-scar-revision",
+    "images": [
+     "nose-scar-revision-before-after-01",
+     "nose-scar-revision-before-after-02"
+    ]
+   },
+   {
+    "title": "Cleft Lip and Palate Revision",
+    "id": "cleft-lip-palate-revision",
+    "images": [
+     "cleft-lip-palate-revision-before-after-01",
+     "cleft-lip-palate-revision-before-after-02",
+     "cleft-lip-palate-revision-before-after-03",
+     "cleft-lip-palate-revision-before-after-04",
+     "cleft-lip-palate-revision-before-after-05",
+     "cleft-lip-palate-revision-before-after-06"
+    ]
+   }
   ]
  },
  "about": {
