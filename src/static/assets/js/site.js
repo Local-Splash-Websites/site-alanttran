@@ -29,9 +29,20 @@
 
   var lb = document.querySelector('.lightbox');
   if (lb) {
-    var items = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]')), cur = 0, img = lb.querySelector('img');
+    var all = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox]')), items = all, cur = 0, img = lb.querySelector('img');
+    // Small source photos are shown up to 2x their size (never past the screen) instead of tiny.
+    img.addEventListener('load', function () {
+      img.style.width = img.naturalWidth && img.naturalWidth < 800 ? Math.min(img.naturalWidth * 2, window.innerWidth * 0.9) + 'px' : '';
+    });
     function open(n) { cur = (n + items.length) % items.length; img.src = items[cur].href; img.alt = items[cur].querySelector('img').alt; lb.hidden = false; }
-    items.forEach(function (a, k) { a.addEventListener('click', function (ev) { ev.preventDefault(); open(k); }); });
+    all.forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        var group = a.getAttribute('data-lightbox');
+        items = group ? all.filter(function (x) { return x.getAttribute('data-lightbox') === group; }) : all;
+        open(items.indexOf(a));
+      });
+    });
     lb.querySelector('.lb-close').onclick = function () { lb.hidden = true; };
     lb.querySelector('.lb-prev').onclick = function () { open(cur - 1); };
     lb.querySelector('.lb-next').onclick = function () { open(cur + 1); };

@@ -454,12 +454,22 @@ def build_services_index():
 
 def build_gallery():
     g = pages["gallery"]
-    cats = " · ".join(e(c) for c in g["categories"])
-    items = "".join(f'<a class="g-item" href="{img_url(i)}" data-lightbox><img src="{img_url(i)}" alt="Before and after photo {n+1}" loading="lazy"></a>' for n, i in enumerate(g["images"]))
+    secs = g["sections"]
+    cats = "".join(f'<li><a href="#{s["id"]}">{e(s["title"])}</a></li>' for s in secs)
+    groups = ""
+    for s in secs:
+        items = "".join(
+            f'<a class="g-item" href="{img_url(i)}" data-lightbox="{s["id"]}">'
+            f'<img src="{img_url(i)}" alt="{e(s["title"])} before and after, patient {n+1}" loading="lazy"></a>'
+            for n, i in enumerate(s["images"]))
+        count = len(s["images"])
+        groups += (f'<section class="gallery-group" id="{s["id"]}" aria-labelledby="{s["id"]}-h">'
+                   f'<h2 id="{s["id"]}-h">{e(s["title"])} <span class="gallery-count">{count} photo{"s" if count != 1 else ""}</span></h2>'
+                   f'<div class="gallery-grid gallery-grid--{s["id"]}">{items}</div></section>')
     body = page_hero("Gallery", "Before & after results", None, "Our Work") + f"""
 <section class="svc-sec"><div class="wrap">
-  <p class="center gallery-cats">{cats}</p>
-  <div class="gallery-grid">{items}</div>
+  <nav class="gallery-cats" aria-label="Gallery categories"><ul>{cats}</ul></nav>
+  {groups}
   <p class="center small">Individual results vary. Photos are of actual patients of Dr. Tran and are shared with permission.</p>
 </div></section>
 <div class="lightbox" hidden><button class="lb-close" aria-label="Close">×</button><button class="lb-prev" aria-label="Previous">‹</button><img alt=""><button class="lb-next" aria-label="Next">›</button></div>
