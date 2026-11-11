@@ -36,7 +36,7 @@ CAT_ORDER = ["Breast", "Body", "Skin", "Face"]
 # ---------------------------------------------------------------- layout
 def logo(cls="", include_mark=False):
     mark = ('<img class="logo-mark" src="/assets/img/alan-tran-mark.png" '
-            'alt="" width="79" height="90">' if include_mark else "")
+            'alt="Alan T. Tran, M.D. logo" width="79" height="90">' if include_mark else "")
     return (f'<a class="logo {cls}" href="/" aria-label="{e(site["practice_name"])} home">'
             f'{mark}<span class="logo-copy">'
             f'<span class="logo-name">{e(site["logo_name"])}</span>'
@@ -113,7 +113,7 @@ def footer():
     <div class="footer-office">
       <p class="f-title">Office Info</p>
       <address>{e(site['address_line'])}<br>{e(site['city'])}, {e(site['state'])} {e(site['zip'])}<br>
-      <a href="tel:{site['phone_e164']}">{e(site['phone'])}</a><br><a href="mailto:{e(site['email'])}">{e(site['email'])}</a></address>
+      <a href="tel:{site['phone_e164']}">{e(site['phone'])}</a><br><a class="js-email" data-u="{e(site['email'].split('@')[0])}" data-d="{e(site['email'].split('@')[1])}" href="/contact/">Email the office</a></address>
       <p class="footer-hours"><strong>Mon-Fri:</strong> 10:00 AM-6:00 PM</p>
       <div class="social">{social}</div>
     </div>
@@ -140,6 +140,10 @@ def page(path, title, desc, body, active="", og_img="dr-alan-tran-practice-hero"
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{BASE}{img_url(og_img)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{e(full_title)}">
+<meta name="twitter:description" content="{e(desc)}">
+<meta name="twitter:image" content="{BASE}{img_url(og_img)}">
 <meta name="theme-color" content="#B3155A">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -205,7 +209,7 @@ def ready_band():
 <section class="ready"><div class="wrap ready-inner">
   <p class="eyebrow">Ready when you are</p>
   <h2>Look your best, naturally<sup class="service-mark">℠</sup></h2>
-  <div class="ready-actions"><a class="btn btn-pink" href="tel:{site['phone_e164']}">{e(site['phone'])}</a><a class="btn btn-outline" href="mailto:{e(site['email'])}">Email the office</a></div>
+  <div class="ready-actions"><a class="btn btn-pink" href="tel:{site['phone_e164']}">{e(site['phone'])}</a><a class="btn btn-outline js-email" data-u="{e(site['email'].split('@')[0])}" data-d="{e(site['email'].split('@')[1])}" href="/contact/">Email the office</a></div>
 </div></section>"""
 
 def page_hero(title, sub="", image=None, eyebrow=""):
@@ -271,7 +275,7 @@ def build_home():
               ("A full spectrum of care", "From rhinoplasty and breast augmentation to breast, nose, and post skin cancer reconstruction."),
               ("Board-certified plastic surgeon", "Certified by the American Board of Plastic Surgery, with more than two decades of practice in Orange County."),
               ("Your goals set the plan", "The procedure is chosen to fit you, never the other way around.")]
-    points_html = "".join(f'<li><span class="pnum">{i+1:02d}</span><div><h4>{e(h)}</h4><p>{e(t)}</p></div></li>' for i, (h, t) in enumerate(points))
+    points_html = "".join(f'<li><span class="pnum">{i+1:02d}</span><div><h3>{e(h)}</h3><p>{e(t)}</p></div></li>' for i, (h, t) in enumerate(points))
     slides = "".join(f'<figure class="slide"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><blockquote>“{e(t)}”</blockquote><figcaption>Verified patient review</figcaption></figure>' for t in TESTIMONIALS)
     dots = "".join(f'<button class="dot" aria-label="Show review {i+1}"></button>' for i in range(len(TESTIMONIALS)))
     # Rotating hero background, same six images and order as the legacy Duda slideshow
@@ -279,15 +283,15 @@ def build_home():
                  "dr-alan-tran-practice-hero", "plastic-surgery-hero-patient",
                  "plastic-surgery-hero-natural-results", "orange-county-plastic-surgery-hero"]
     hero_slides = "".join(
-        f'<div class="hero-slide is-active" style="background-image:url(\'{img_url(n)}\')"></div>' if i == 0
+        f'<div class="hero-slide hero-slide--first is-active"></div>' if i == 0
         else f'<div class="hero-slide" data-bg="{img_url(n)}"></div>'
         for i, n in enumerate(hero_imgs))
     body = f"""
 <section class="hero" data-hero-slides>
   <div class="hero-slides" aria-hidden="true">{hero_slides}</div>
   <div class="wrap hero-inner">
-    <p class="hero-tag">{e(s['tagline'])}</p>
-    <h1>Look your best, <em>Naturally<sup class="service-mark">℠</sup></em></h1>
+    <h1 class="hero-tag">Plastic Surgeon in Fountain Valley, CA · {e(s['tagline'])}</h1>
+    <p class="hero-title">Look your best, <em>Naturally<sup class="service-mark">℠</sup></em></p>
     <p class="lede">Dr. Alan Tran spends real, unhurried time with every patient, refining rhinoplasty, breast, body and facial procedures toward one goal: results that still look like you.</p>
     <div class="hero-actions"><a class="btn btn-pink" href="/contact/">Request a Consultation</a><a class="btn btn-outline-light" href="/about/">Meet Dr. Tran</a></div>
   </div>
@@ -325,6 +329,13 @@ def build_home():
     <p class="pull">“Enhancing your natural beauty”</p>
     <p>You’ll spend real consultation time directly with Dr. Alan Tran, discussing your goals, your options, and what results you can realistically expect - in a setting built to feel supportive, not clinical.</p>
   </div>
+</div></section>
+<section class="intro-sec" aria-labelledby="intro-title"><div class="wrap">
+  <p class="eyebrow center">Plastic Surgery in Fountain Valley</p>
+  <h2 id="intro-title">Cosmetic and reconstructive surgery for Orange County</h2>
+  <p>Dr. Alan T. Tran is a plastic surgeon certified by the American Board of Plastic Surgery, practicing in Fountain Valley since 2000. From his office at {e(s['address_line'])}, he treats patients from Fountain Valley and across Orange County, and every consultation is spent with Dr. Tran himself.</p>
+  <p>For the breast, he performs <a href="/services/breast-augmentation/">breast augmentation</a>, <a href="/services/breast-lift/">breast lift</a>, <a href="/services/breast-reduction/">breast reduction</a>, <a href="/services/breast-revision/">breast revision</a> and <a href="/services/breast-reconstruction/">breast reconstruction</a>. Body procedures include <a href="/services/tummy-tuck-abdominoplasty/">tummy tuck</a>, <a href="/services/liposuction/">liposuction</a>, <a href="/services/body-contouring/">body contouring</a> and <a href="/services/brazilian-butt-lift-fat-grafting/">Brazilian butt lift</a>. For the face, he offers <a href="/services/eyelid-surgery/">eyelid surgery</a>, <a href="/services/rhinoplasty/">rhinoplasty</a>, <a href="/services/face-lift/">face lift</a>, <a href="/services/neck-lift/">neck lift</a> and <a href="/services/brow-lift/">brow lift</a>.</p>
+  <p>Dr. Tran also treats the skin, with <a href="/services/keloid-scar-treatment/">keloid and scar treatment</a>, <a href="/services/skin-cancer-treatments/">skin cancer treatment</a>, <a href="/services/earlobe-repair/">earlobe repair</a> and <a href="/services/injectables-fillers/">injectables and fillers</a>. Since 2002 he has repaired cleft lip and palate for children through charitable surgical care. Whatever the procedure, the plan is built around your goals and a result that still looks like you.</p>
 </div></section>
 <section class="tiles-sec"><div class="wrap">
   <p class="eyebrow center">Procedures</p>
@@ -365,7 +376,7 @@ def build_home():
     <dl class="visit-list">
       <dt>Address</dt><dd>{e(s['address_line'])}, {e(s['city'])}, {e(s['state'])} {e(s['zip'])}</dd>
       <dt>Phone</dt><dd><a href="tel:{s['phone_e164']}">{e(s['phone'])}</a></dd>
-      <dt>Email</dt><dd><a href="mailto:{e(s['email'])}">{e(s['email'])}</a></dd>
+      <dt>Email</dt><dd><a class="js-email" data-u="{e(s['email'].split('@')[0])}" data-d="{e(s['email'].split('@')[1])}" href="/contact/">Email the office</a></dd>
       <dt>Hours</dt><dd>Mon–Fri, 10:00am–6:00pm · Sat–Sun, Closed</dd>
     </dl>
     <a class="btn btn-pink" href="tel:{s['phone_e164']}">Call to Book</a>
@@ -378,8 +389,8 @@ def build_home():
         "telephone": s["phone"], "email": s["email"], "medicalSpecialty": "PlasticSurgery",
         "address": {"@type": "PostalAddress", "streetAddress": s["address_line"], "addressLocality": s["city"], "addressRegion": s["state"], "postalCode": s["zip"], "addressCountry": "US"},
         "openingHours": "Mo-Fr 10:00-18:00", "foundingDate": s["established"], "image": BASE + img_url("dr-alan-tran-office-portrait")})}</script>"""
-    page("/", "Alan T. Tran, M.D. | Plastic Surgery in Orange County",
-         "Board-certified plastic and reconstructive surgeon Dr. Alan T. Tran has served Orange County since 2000. Breast, body, skin and facial procedures for patients throughout Orange County, CA.",
+    page("/", "Plastic Surgeon in Fountain Valley, CA | Alan T. Tran, M.D.",
+         "Board-certified plastic surgeon Dr. Alan T. Tran in Fountain Valley, CA. Breast, body, skin and facial surgery for Orange County patients since 2000.",
          body, "home", jsonld=jsonld)
 
 WHY_US_PAGES = [("/about/", "About Dr. Tran"), ("/meet-the-doctor/", "Meet the Doctor"), ("/tour-the-office/", "Tour the Office")]
@@ -536,7 +547,7 @@ def build_contact():
     <address>{e(site['address_line'])}<br>{e(site['city'])}, {e(site['state'])} {e(site['zip'])}</address>
     <p><strong>Phone</strong><br><a href="tel:{site['phone_e164']}">{e(site['phone'])}</a></p>
     <p><strong>Fax</strong><br>{e(site['fax'])}</p>
-    <p><strong>Email</strong><br><a href="mailto:{e(site['email'])}">{e(site['email'])}</a></p>
+    <p><strong>Email</strong><br><a class="js-email" data-u="{e(site['email'].split('@')[0])}" data-d="{e(site['email'].split('@')[1])}" href="/contact/">Email the office</a></p>
     <p><strong>Hours</strong><br>Monday – Friday, 10:00 AM – 6:00 PM<br>Saturday &amp; Sunday, Closed</p>
   </div>
   <div class="form-card"><h2>Send Us a Message</h2>{contact_form(opts)}</div>
