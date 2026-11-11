@@ -164,3 +164,10 @@
   bindGroup('[data-service-tile]', '[data-service-panel]', 'data-service-tile', 'data-service-panel');
   bindGroup('[data-feature-card]', '[data-feature-panel]', 'data-feature-card', 'data-feature-panel');
 })();
+
+// Email links: the address is assembled here so it never sits in the page as plain text.
+(function () {
+  document.querySelectorAll('a.js-email[data-u][data-d]').forEach(function (a) {
+    a.href = 'mailto:' + a.getAttribute('data-u') + '@' + a.getAttribute('data-d');
+  });
+})();
