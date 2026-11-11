@@ -9,7 +9,7 @@ RewriteEngine On
 # HTTP -> HTTPS redirect is added to the Apache vhost by certbot (ENABLE_HTTPS=true),
 # so the site still works over plain http before a certificate exists.
 
-# Leads: proxy to the shared website-lead-submit service (github.com/localsplash/website-lead-submit),
+# Leads: proxy to the shared vibesite-lead-submit service (github.com/localsplash/vibesite-lead-submit),
 # keyed by Duda site_name 20e7336c. Old /lead-webhook paths are kept for cached pages.
 RewriteRule ^(v1/lead|lead-webhook(\.php)?)/?$ %{ENV:LEADS_SERVICE_URL}/v1/lead [P,L]
 
