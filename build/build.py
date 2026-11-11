@@ -290,8 +290,8 @@ def build_home():
 <section class="hero" data-hero-slides>
   <div class="hero-slides" aria-hidden="true">{hero_slides}</div>
   <div class="wrap hero-inner">
-    <h1 class="hero-tag">Plastic Surgeon in Fountain Valley, CA · {e(s['tagline'])}</h1>
-    <p class="hero-title">Look your best, <em>Naturally<sup class="service-mark">℠</sup></em></p>
+    <p class="hero-tag">{e(s['tagline'])}</p>
+    <h1>Look your best, <em>Naturally<sup class="service-mark">℠</sup></em></h1>
     <p class="lede">Dr. Alan Tran spends real, unhurried time with every patient, refining rhinoplasty, breast, body and facial procedures toward one goal: results that still look like you.</p>
     <div class="hero-actions"><a class="btn btn-pink" href="/contact/">Request a Consultation</a><a class="btn btn-outline-light" href="/about/">Meet Dr. Tran</a></div>
   </div>
